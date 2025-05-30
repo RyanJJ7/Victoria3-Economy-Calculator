@@ -1,0 +1,136 @@
+#ifndef GOODS_H
+#define GOODS_H
+#include <string>
+using namespace std;
+
+const int NSIZE = 14;
+const int ASIZE = 18;
+
+class goodsType {
+private:
+	string name;
+	int price;
+	float sell;
+	float buy;
+	float production;
+	float consumption;
+	float milConsumption;
+	float popConsumption;
+	float localPopConsumption;
+	float imports;
+	float throughput;
+	float obsession;
+	float taboo;
+	float localObsession;
+	float localTaboo;
+	bool bold[NSIZE];
+	float weight[NSIZE];
+	float minSupplyShare[NSIZE];
+	float maxSupplyShare[NSIZE];
+	float input[2];
+	float output[2];
+	float getWeight(float, int) const;
+	float getLocalWeight(float, int) const;
+	bool militaryGood() const;
+
+public:
+	void setGood(string);
+	void setBasePrice(int);
+	void setSellOrders(float);
+	void setBuyOrders(float);
+	void setProduction(float);
+	void setConsumption(float);
+	void setMilitaryConsumption();
+	void setMilitaryConsumption(float);
+	void setMobilizedConsumption(bool[][2], float&, float&, int) const;
+	void setPopConsumption(float);
+	void setLocalPopConsumption(float);
+	void setImports(float);
+	void setThroughput(float);
+	void setObsession(float);
+	void setTaboo(float);
+	void setLocalObsession(float);
+	void setLocalTaboo(float);
+	void setDefault(bool, int);
+	void setWeight(float, int);
+	void setMinSS(float, int);
+	void setMaxSS(float, int);
+	void setInput(int);
+	void setOutput(int);
+	void setInput(float, int);
+	void setOutput(float, int);
+	void setInputOutput(int);
+
+	string getGood() const;
+	float getSellOrders() const;
+	float getBuyOrders() const;
+	float getProduction() const;
+	float getConsumption() const;
+	float getMilitaryConsumption() const;
+	float getPopConsumption() const;
+	float getPopConsumption(float) const;
+	float getPopConsumptionChange(float) const;
+	float getLocalPopConsumption() const;
+	float getLocalPopConsumption(float) const;
+	float getLocalPopConsumptionChange(float) const;
+	float getImports() const;
+	float getThroughput() const;
+	float getObsession() const;
+	float getTaboo() const;
+	float getLocalObsession() const;
+	float getLocalTaboo() const;
+	float getInput(int) const;
+	float getOutput(int) const;
+	int getBalance() const;
+	int getBalance(float) const;
+	int getBalancePrediction(float) const;
+	int getBalancePrediction(float, float) const;
+	int getStateBalance() const;
+	int getStateBalance(float) const;
+	int getStateBalancePrediction(float) const;
+	int getStateBalancePrediction(float, float) const;
+	float getMarketShare(int) const;
+	float getMarketShare(float, int) const;
+	float getLocalMarketShare(float, int) const;
+	float getMarketShare(float, float, int) const;
+	float getPurchaseWeight(float, float, int) const;
+	float getPurchaseWeight(float, float, float, int) const;
+	float getPurchaseWeightLocalOutput(float, float, float, int) const;
+	float getPurchaseWeight(float, float, float, float, int) const;
+	float getLocalPurchaseWeight(float, float, int) const;
+	float getLocalPurchaseWeight(float, float, float, int) const;
+	float getLocalPurchaseWeight(float, float, float, float, int) const;
+	float getMarketPricePercent() const;
+	float getMarketPricePercent(float) const;
+	float getMarketPricePercent(float, float) const;
+	float getMarketPrice() const;
+	float getMarketPrice(float) const;
+	float getMarketPrice(float, float) const;
+	float getMarketPricePercentPrediction(float) const;
+	float getMarketPricePercentPrediction(float, float) const;
+	float getMarketPricePercentPrediction(float, float, float) const;
+	float getMarketPricePrediction(float) const;
+	float getMarketPricePrediction(float, float) const;
+	float getMarketPricePrediction(float, float, float) const;
+	float getLocalPrice(float) const;
+	float getLocalPrice(float, float) const;
+	float getLocalPrice(float, float, float) const;
+	float getLocalPriceImportsCanceled(float, float, float) const;
+	float getLocalPricePercent(float) const;
+	float getLocalPricePercent(float, float) const;
+	float getLocalPricePercent(float, float, float) const;
+	float getLocalPricePercentImportsCanceled(float, float, float) const;
+	float getLocalPricePrediction(float, float, float) const;
+	float getLocalPricePrediction(float, float, float, float) const;
+	float getLocalPricePrediction(float, float, float, float, float) const;
+	float getLocalPricePredictionImportsCanceled(float, float, float, float, float) const;
+	float getLocalPricePercentPrediction(float, float, float) const;
+	float getLocalPricePercentPrediction(float, float, float, float) const;
+	float getLocalPricePercentPrediction(float, float, float, float, float) const;
+	float getLocalPricePercentPredictionImportsCanceled(float, float, float, float, float) const;
+
+	bool hasWeight() const;
+	bool localGood() const;
+	bool tradable() const;
+};
+#endif
