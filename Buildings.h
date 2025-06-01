@@ -32,7 +32,6 @@ public:
 	float getThroughput(int) const;
 	float getBaseWage() const;
 	float getWage(int[][2], int[][2], int) const;
-	float getWage(int[], int[][2], int[][2], int[][2], int[][2], int[][2], int) const;
 	int getBuildingLocation() const;
 	int getProductionMethod() const;
 	int getSize() const;
