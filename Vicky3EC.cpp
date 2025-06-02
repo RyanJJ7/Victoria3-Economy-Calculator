@@ -9,19 +9,20 @@ const int BSIZE = 63;
 const int SSIZE = 1337;
 
 void reset();
-void initialize(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float&, float&, float&, int&, float&, bool[][2]);
+void initialize(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float&, float&, float&, int&, float&, int[], bool[][2]);
 void vanilla(goodsType[], productionMethodsType&, buildingsType[], string[], bool, bool);
 void setMilitaryConsumption(goodsType[], productionMethodsType&, int, float, int, string);
 void setInputGood(goodsType[], productionMethodsType&, int, float, int, string);
 void setOutputGood(goodsType[], productionMethodsType&, int, float, int, string);
 float trunc1D(float);
 float trunc2D(float);
-void menu(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float&, float&, float&, int&, float&, bool[][2]);
+void menu(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float&, float&, float&, int&, float&, int[], bool[][2]);
 void infamyMenu(float&);
-void nationalMenu(goodsType[], float&, bool[][2]);
-void nationalMenu(goodsType[], int&, float&, bool[][2]);
+void nationalMenu(goodsType[], float&, int[], bool[][2]);
+void nationalMenu(goodsType[], int&, float&, int[], bool[][2]);
 float economyOfScale();
 void armyMobilization(bool[][2]);
+int citizenshipLaw();
 void nationalMarket(goodsType[]);
 void nationalMarket(goodsType[], float);
 void balance(goodsType[], int);
@@ -45,8 +46,8 @@ void production(goodsType[], float, float, float, int);
 void goodData(goodsType, float);
 void productionProfit(goodsType, float, float, float);
 void productionProfit(goodsType, float, float, float, float);
-void buildings(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2]);
-void buildings(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2]);
+void buildings(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2]);
+void buildings(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2]);
 float profit(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int);
 float profit(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int);
 float profitImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int);
@@ -55,10 +56,10 @@ float productivity(goodsType[], productionMethodsType&, buildingsType[], locatio
 float productivity(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int);
 float productivityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int);
 float productivityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int);
-void sectors(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int);
-void sectors(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int);
-void sectorsImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int);
-void sectorsImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int);
+void sectors(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int);
+void sectors(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int);
+void sectorsImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int);
+void sectorsImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int);
 float profit(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int, int);
 float profit(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int, int);
 float profitImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int, int);
@@ -67,25 +68,25 @@ float productivity(goodsType[], productionMethodsType&, buildingsType[], locatio
 float productivity(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int, int);
 float productivityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, bool[][2], int, int);
 float productivityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], float, float, float, bool[][2], int, int);
-void construction(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void construction(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
-void constructionImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void constructionImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
-void state(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void state(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
-void stateImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void stateImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
-void stateEoSOverride(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void stateEoSOverride(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
-void stateEoSOverrideImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, bool[][2], int, int);
-void stateEoSOverrideImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, bool[][2], int, int);
+void construction(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void construction(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
+void constructionImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void constructionImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
+void state(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void state(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
+void stateImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void stateImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
+void stateEoSOverride(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void stateEoSOverride(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
+void stateEoSOverrideImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, int[], bool[][2], int, int);
+void stateEoSOverrideImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float, float, float, float, int[], bool[][2], int, int);
 int armyUnitType();
 int navyUnitType();
-void employment(string[], int[], int[]);
-void profitability(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], float[], int, int);
-void profitability(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], float[], int, int);
-void profitabilityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], float[], int, int);
-void profitabilityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], float[], int, int);
+void employment(string[], int[], int[], int[], int[], int[]);
+void profitability(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], int[][2], int[][2], int[][2], float[], int, int);
+void profitability(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], int[][2], int[][2], int[][2], float[], int, int);
+void profitabilityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], int[][2], int[][2], int[][2], float[], int, int);
+void profitabilityImportsCanceled(goodsType[], productionMethodsType&, buildingsType[], locationsType[], string[], float[], float[], float[], float[], float[], float[], float[][6], float, int, int, int[], int[], int[][2], int[][2], int[][2], int[][2], int[][2], float[], int, int);
 float getPurchaseWeight(goodsType[], float, int);
 float getPurchaseWeight(goodsType[], float, float, int, int);
 float getPurchaseWeightLocalOutput(goodsType[], float, float, int, int);
@@ -95,7 +96,7 @@ float getLocalPurchaseWeight(goodsType[], float, int);
 float getLocalPurchaseWeight(goodsType[], float, float, int, int);
 float getLocalPurchaseWeight(goodsType[], float[], float[], float, int);
 float getLocalPurchaseWeightImportsCanceled(goodsType[], float[], float[], float, int);
-void save(goodsType[], buildingsType[], locationsType[], float, float, float, int, float, bool[][2]);
+void save(goodsType[], buildingsType[], locationsType[], float, float, float, int, float, int[], bool[][2]);
 
 int main()
 {
@@ -109,6 +110,7 @@ int main()
 	float gdp;
 	int states;
 	float eosCap;
+	int citizenship[2];
 	bool mobilization[ASIZE][2];
 	bool reinitialize = false;
 	bool setMethods = false;
@@ -130,9 +132,9 @@ int main()
 	else if (testing)
 		vanilla(good, method, building, profession, testing, setMethods);
 	else {
-		initialize(good, method, building, location, profession, inf, mapi, gdp, states, eosCap, mobilization);
-		menu(good, method, building, location, profession, inf, mapi, gdp, states, eosCap, mobilization);
-		save(good, building, location, inf, mapi, gdp, states, eosCap, mobilization);
+		initialize(good, method, building, location, profession, inf, mapi, gdp, states, eosCap, citizenship, mobilization);
+		menu(good, method, building, location, profession, inf, mapi, gdp, states, eosCap, citizenship, mobilization);
+		save(good, building, location, inf, mapi, gdp, states, eosCap, citizenship, mobilization);
 	}
 
 	return 0;
@@ -152,7 +154,7 @@ void reset()
 	fs::create_directory("C:\\Users\\RyanJ\\OneDrive\\Desktop\\Vicky3\\Vicky3 Programs\\States");
 }
 
-void initialize(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float& inf, float& mapi, float& gdp, int& states, float& eosCap, bool mobilization[ASIZE][2])
+void initialize(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float& inf, float& mapi, float& gdp, int& states, float& eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	float sell = 0;
 	float buy = 0;
@@ -176,9 +178,10 @@ void initialize(goodsType good[GSIZE], productionMethodsType& method, buildingsT
 	gdp = 1;
 	states = 1;
 	eosCap = 1.2;
-	for (int i = 0; i < ASIZE; i++) {
-		for (int j = 0; j < 2; j++)
-			mobilization[i][j] = 0;
+	for (int i = 0; i < 2; i++) {
+		citizenship[i] = 0;
+		for (int j = 0; j < ASIZE; j++)
+			mobilization[j][i] = 0;
 	}
 	
 	vanilla(good, method, building, profession, false, false);
@@ -241,6 +244,8 @@ void initialize(goodsType good[GSIZE], productionMethodsType& method, buildingsT
 		for (int j = 0; j < 2; j++)
 			inFile >> mobilization[i][j];
 	}
+	for (int i = 0; i < 2; i++)
+		inFile >> citizenship[i];
 	inFile >> eosCap;
 	inFile.close();
 }
@@ -1376,14 +1381,14 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		method.setProfession(i, 500, 1, "Machinists");
 		method.setProfession(i, 500, 1, "Shopkeepers");
 		setInputGood(good, method, i, 35, 2, "Lead");
-		setOutputGood(good, method, i, 70, 2, "Glass");
+		setOutputGood(good, method, i, 60, 2, "Glass");
 		method.setProfession(i, 500, 2, "Engineers");
 		method.setProfession(i, 3000, 2, "Laborers");
 		method.setProfession(i, 1000, 2, "Machinists");
 		method.setProfession(i, 500, 2, "Shopkeepers");
-		setInputGood(good, method, i, 25, 3, "Oil");
-		setInputGood(good, method, i, 35, 3, "Lead");
-		setOutputGood(good, method, i, 110, 3, "Glass");
+		setInputGood(good, method, i, 20, 3, "Oil");
+		setInputGood(good, method, i, 30, 3, "Lead");
+		setOutputGood(good, method, i, 100, 3, "Glass");
 		method.setProfession(i, 750, 3, "Engineers");
 		method.setProfession(i, 2500, 3, "Laborers");
 		method.setProfession(i, 1250, 3, "Machinists");
@@ -1426,13 +1431,13 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 			}
 		}
 		setInputGood(good, method, i, 5, 1, "Dye");
-		setOutputGood(good, method, i, -20, 1, "Glass");
-		setOutputGood(good, method, i, 20, 1, "Porcelain");
-		method.setProfession(i, 500, 1, "Shopkeepers");
-		setInputGood(good, method, i, 15, 2, "Dye");
-		setOutputGood(good, method, i, -55, 2, "Glass");
-		setOutputGood(good, method, i, 55, 2, "Porcelain");
-		method.setProfession(i, 1000, 2, "Shopkeepers");
+		setOutputGood(good, method, i, -10, 1, "Glass");
+		setOutputGood(good, method, i, 10, 1, "Porcelain");
+		method.setProfession(i, 250, 1, "Shopkeepers");
+		setInputGood(good, method, i, 10, 2, "Dye");
+		setOutputGood(good, method, i, -20, 2, "Glass");
+		setOutputGood(good, method, i, 30, 2, "Porcelain");
+		method.setProfession(i, 500, 2, "Shopkeepers");
 	}
 	else {
 		size *= method.getSize(i);
@@ -1464,8 +1469,9 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 					method.setProfession(i, 0, l, n);
 			}
 		}
-		setInputGood(good, method, i, 10, 1, "Oil");
-		setInputGood(good, method, i, 5, 1, "Tools");
+		setInputGood(good, method, i, 5, 1, "Oil");
+		setInputGood(good, method, i, 2, 1, "Tools");
+		setInputGood(good, method, i, 2, 1, "Engines");
 		method.setProfession(i, -2500, 1, "Laborers");
 	}
 	else {
@@ -2059,9 +2065,9 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 			}
 		}
 		setInputGood(good, method, i, 10, 1, "Rubber");
-		setInputGood(good, method, i, 20, 1, "Oil");
+		setInputGood(good, method, i, 10, 1, "Oil");
 		setOutputGood(good, method, i, -20, 1, "Engines");
-		setOutputGood(good, method, i, 25, 1, "Automobiles");
+		setOutputGood(good, method, i, 30, 1, "Automobiles");
 		method.setProfession(i, 500, 1, "Engineers");
 		method.setProfession(i, 1000, 1, "Machinists");
 	}
@@ -2147,7 +2153,7 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		method.setProfession(i, 750, 0, "Machinists");
 		method.setProfession(i, 500, 0, "Shopkeepers");
 		setInputGood(good, method, i, 20, 1, "Fabric");
-		setInputGood(good, method, i, 40, 1, "Wood");
+		setInputGood(good, method, i, 20, 1, "Wood");
 		setInputGood(good, method, i, 5, 1, "Engines");
 		setInputGood(good, method, i, 20, 1, "Hardwood");
 		setOutputGood(good, method, i, 70, 1, "Clippers");
@@ -2233,9 +2239,9 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		method.setProfession(i, 2500, 2, "Laborers");
 		method.setProfession(i, 1000, 2, "Machinists");
 		method.setProfession(i, 500, 2, "Shopkeepers");
-		setInputGood(good, method, i, 15, 3, "Engines");
-		setInputGood(good, method, i, 50, 3, "Steel");
-		setInputGood(good, method, i, 35, 3, "Electricity");
+		setInputGood(good, method, i, 20, 3, "Engines");
+		setInputGood(good, method, i, 40, 3, "Steel");
+		setInputGood(good, method, i, 30, 3, "Electricity");
 		setOutputGood(good, method, i, 70, 3, "Ironclads");
 		method.setProfession(i, 1000, 3, "Engineers");
 		method.setProfession(i, 2000, 3, "Laborers");
@@ -2793,8 +2799,8 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 					method.setProfession(i, 0, l, n);
 			}
 		}
-		setInputGood(good, method, i, 1, 1, "Coal");
-		setOutputGood(good, method, i, 2, 1, "Services");
+		setInputGood(good, method, i, 2, 1, "Coal");
+		setOutputGood(good, method, i, 5, 1, "Services");
 		method.setProfession(i, 250, 1, "Laborers");
 		setInputGood(good, method, i, 3, 2, "Electricity");
 		setOutputGood(good, method, i, 10, 2, "Services");
@@ -2831,14 +2837,14 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 					method.setProfession(i, 0, l, n);
 			}
 		}
-		setOutputGood(good, method, i, 5, 0, "Transportation");
-		setInputGood(good, method, i, 1, 1, "Engines");
-		setOutputGood(good, method, i, 8, 1, "Transportation");
+		setOutputGood(good, method, i, 2, 0, "Transportation");
+		setInputGood(good, method, i, 0.5, 1, "Engines");
+		setOutputGood(good, method, i, 4, 1, "Transportation");
 		method.setProfession(i, 100, 1, "Engineers");
 		method.setProfession(i, 200, 1, "Machinists");
 		method.setProfession(i, -500, 1, "Laborers");
 		setInputGood(good, method, i, 1, 2, "Automobiles");
-		setOutputGood(good, method, i, 10, 2, "Transportation");
+		setOutputGood(good, method, i, 8, 2, "Transportation");
 		method.setProfession(i, 200, 2, "Engineers");
 		method.setProfession(i, 400, 2, "Machinists");
 		method.setProfession(i, -1000, 2, "Laborers");
@@ -3262,7 +3268,7 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		setOutputGood(good, method, i, 60, 1, "Grain");
 		method.setProfession(i, 3000, 1, "Farmers");
 		method.setProfession(i, 7000, 1, "Laborers");
-		setInputGood(good, method, i, 30, 2, "Fertilizer");
+		setInputGood(good, method, i, 20, 2, "Fertilizer");
 		setOutputGood(good, method, i, 90, 2, "Grain");
 		method.setProfession(i, 4000, 2, "Farmers");
 		method.setProfession(i, 6000, 2, "Laborers");
@@ -3768,84 +3774,6 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		setInputGood(good, method, i, 2, 2, "Transportation");
 		setInputGood(good, method, i, 3, 2, "Electricity");
 		method.setProfession(i, -1400, 2, "Laborers");
-	}
-	else {
-		k += size * method.getSize(i);
-	}
-	i++;
-	if (setMethods) {
-		method.setProductionMethod(i, "Base");
-		method.setSize(i, 2);
-		for (int l = 0; l < method.getSize(i); l++) {
-			int n = 0;
-			if (GSIZE > PSIZE) {
-				for (;n < PSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-					method.setProfession(i, 0, l, n);
-				}
-				for (;n < GSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-				}
-			}
-			else {
-				for (;n < GSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-					method.setProfession(i, 0, l, n);
-				}
-				for (;n < PSIZE; n++)
-					method.setProfession(i, 0, l, n);
-			}
-		}
-		setOutputGood(good, method, i, 20, 0, "Wine");
-		method.setProfession(i, 1000, 0, "Farmers");
-		method.setProfession(i, 4000, 0, "Laborers");
-		setInputGood(good, method, i, 5, 1, "Engines");
-		setOutputGood(good, method, i, 40, 1, "Wine");
-		method.setProfession(i, 1500, 1, "Farmers");
-		method.setProfession(i, 3000, 1, "Laborers");
-		method.setProfession(i, 500, 1, "Machinists");
-	}
-	else {
-		building[j].setSize(i - building[j].getProductionMethod());
-		building[++j].setBuilding("Vineyard");
-		building[j].setConstructionCost(200);
-		building[j].setInfrastructureUsage(1);
-		building[j].setBuildingLocation(k);
-		building[j].setProductionMethod(i);
-		size = method.getSize(i);
-	}
-	i++;
-	if (setMethods) {
-		method.setProductionMethod(i, "Train Automation");
-		method.setSize(i, 2);
-		for (int l = 0; l < method.getSize(i); l++) {
-			int n = 0;
-			if (GSIZE > PSIZE) {
-				for (;n < PSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-					method.setProfession(i, 0, l, n);
-				}
-				for (;n < GSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-				}
-			}
-			else {
-				for (;n < GSIZE; n++) {
-					method.setInputGood(i, 0, l, n);
-					method.setOutputGood(i, 0, l, n);
-					method.setProfession(i, 0, l, n);
-				}
-				for (;n < PSIZE; n++)
-					method.setProfession(i, 0, l, n);
-			}
-		}
-		setInputGood(good, method, i, 5, 1, "Transportation");
-		method.setProfession(i, -1000, 1, "Laborers");
 	}
 	else {
 		k += size * method.getSize(i);
@@ -5422,6 +5350,84 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 	i++;
 	if (setMethods) {
 		method.setProductionMethod(i, "Base");
+		method.setSize(i, 2);
+		for (int l = 0; l < method.getSize(i); l++) {
+			int n = 0;
+			if (GSIZE > PSIZE) {
+				for (;n < PSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+					method.setProfession(i, 0, l, n);
+				}
+				for (;n < GSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+				}
+			}
+			else {
+				for (;n < GSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+					method.setProfession(i, 0, l, n);
+				}
+				for (;n < PSIZE; n++)
+					method.setProfession(i, 0, l, n);
+			}
+		}
+		setOutputGood(good, method, i, 20, 0, "Wine");
+		method.setProfession(i, 1000, 0, "Farmers");
+		method.setProfession(i, 4000, 0, "Laborers");
+		setInputGood(good, method, i, 5, 1, "Engines");
+		setOutputGood(good, method, i, 40, 1, "Wine");
+		method.setProfession(i, 1500, 1, "Farmers");
+		method.setProfession(i, 3000, 1, "Laborers");
+		method.setProfession(i, 500, 1, "Machinists");
+	}
+	else {
+		building[j].setSize(i - building[j].getProductionMethod());
+		building[++j].setBuilding("Vineyard");
+		building[j].setConstructionCost(200);
+		building[j].setInfrastructureUsage(1);
+		building[j].setBuildingLocation(k);
+		building[j].setProductionMethod(i);
+		size = method.getSize(i);
+	}
+	i++;
+	if (setMethods) {
+		method.setProductionMethod(i, "Train Automation");
+		method.setSize(i, 2);
+		for (int l = 0; l < method.getSize(i); l++) {
+			int n = 0;
+			if (GSIZE > PSIZE) {
+				for (;n < PSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+					method.setProfession(i, 0, l, n);
+				}
+				for (;n < GSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+				}
+			}
+			else {
+				for (;n < GSIZE; n++) {
+					method.setInputGood(i, 0, l, n);
+					method.setOutputGood(i, 0, l, n);
+					method.setProfession(i, 0, l, n);
+				}
+				for (;n < PSIZE; n++)
+					method.setProfession(i, 0, l, n);
+			}
+		}
+		setInputGood(good, method, i, 5, 1, "Transportation");
+		method.setProfession(i, -1000, 1, "Laborers");
+	}
+	else {
+		k += size * method.getSize(i);
+	}
+	i++;
+	if (setMethods) {
+		method.setProductionMethod(i, "Base");
 		method.setSize(i, 3);
 		for (int l = 0; l < method.getSize(i); l++) {
 			int n = 0;
@@ -5536,10 +5542,9 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 		setInputGood(good, method, i, 4, 1, "Coal");
 		setInputGood(good, method, i, 1, 1, "Engines");
 		method.setProfession(i, -1000, 1, "Laborers");
-		setInputGood(good, method, i, 5, 2, "Oil");
-		setInputGood(good, method, i, 10, 2, "Tools");
-		method.setProfession(i, 200, 2, "Engineers");
-		method.setProfession(i, 200, 2, "Machinists");
+		setInputGood(good, method, i, 4, 2, "Oil");
+		setInputGood(good, method, i, 1, 2, "Engines");
+		method.setProfession(i, 250, 2, "Engineers");
 		method.setProfession(i, -1500, 2, "Laborers");
 	}
 	else {
@@ -6826,7 +6831,7 @@ void vanilla(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 	else {
 		building[j].setSize(i - building[j].getProductionMethod());
 		building[++j].setBuilding("Government Administration");
-		building[j].setConstructionCost(400);
+		building[j].setConstructionCost(100);
 		building[j].setInfrastructureUsage(1);
 		building[j].setBuildingLocation(k);
 		building[j].setProductionMethod(i);
@@ -7352,7 +7357,7 @@ float trunc2D(float num)
 	return trunc(num * 100) / 100;
 }
 
-void menu(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float& inf, float& mapi, float& gdp, int& states, float& eosCap, bool mobilization[ASIZE][2])
+void menu(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float& inf, float& mapi, float& gdp, int& states, float& eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	bool predict = false;
 	string in;
@@ -7415,9 +7420,9 @@ void menu(goodsType good[GSIZE], productionMethodsType& method, buildingsType bu
 					}
 				}
 				if (predict)
-					nationalMenu(good, states, eosCap, mobilization);
+					nationalMenu(good, states, eosCap, citizenship, mobilization);
 				else {
-					nationalMenu(good, eosCap, mobilization);
+					nationalMenu(good, eosCap, citizenship, mobilization);
 				}
 				break;
 			case '4':
@@ -7429,9 +7434,9 @@ void menu(goodsType good[GSIZE], productionMethodsType& method, buildingsType bu
 				break;
 			case '5':
 				if (predict)
-					buildings(good, method, building, location, profession, mapi, gdp, 1 / float(states), eosCap, mobilization);
+					buildings(good, method, building, location, profession, mapi, gdp, 1 / float(states), eosCap, citizenship, mobilization);
 				else {
-					buildings(good, method, building, location, profession, mapi, eosCap, mobilization);
+					buildings(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization);
 				}
 				break;
 			case '6':
@@ -7849,7 +7854,7 @@ void infamyMenu(float& inf)
 	} while (!exit);
 }
 
-void nationalMenu(goodsType good[GSIZE], float& eosCap, bool mobilization[ASIZE][2])
+void nationalMenu(goodsType good[GSIZE], float& eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	string in;
 	char choice;
@@ -7859,11 +7864,49 @@ void nationalMenu(goodsType good[GSIZE], float& eosCap, bool mobilization[ASIZE]
 		char answer = '\0';
 		system("cls");
 
-		cout << "Maximum Economy of Scale: " << (eosCap - 1) * 100 << "%\n\n"
+		cout << "Maximum Economy of Scale: " << (eosCap - 1) * 100 << "%\n"
+			 << "Citizenship Law: ";
+		switch (citizenship[0]) {
+		case 1:
+			cout << "National Supremacy";
+			break;
+		case 2:
+			cout << "Racial Segregation";
+			break;
+		case 3:
+			cout << "Cultural Exclusion";
+			break;
+		case 4:
+			cout << "Multiculturalism";
+			break;
+		default:
+			cout << "Ethnostate";
+		}
+		cout << endl
+			 << "New Citizenship Law: ";
+		switch (citizenship[1]) {
+		case 1:
+			cout << "National Supremacy";
+			break;
+		case 2:
+			cout << "Racial Segregation";
+			break;
+		case 3:
+			cout << "Cultural Exclusion";
+			break;
+		case 4:
+			cout << "Multiculturalism";
+			break;
+		default:
+			cout << "Ethnostate";
+		}
+		cout << endl << endl
 			 << "1. Set Maximum Economy of Scale\n"
-			 << "2. Set Army Mobilization\n"
-			 << "3. National Market\n"
-			 << "4. Reset Market Data\n"
+			 << "2. Set Citizenship Law\n"
+			 << "3. Set New Citizenship Law\n"
+			 << "4. Set Army Mobilization\n"
+			 << "5. National Market\n"
+			 << "6. Reset Market Data\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
 		getline(cin, in);
@@ -7877,12 +7920,19 @@ void nationalMenu(goodsType good[GSIZE], float& eosCap, bool mobilization[ASIZE]
 				eosCap = economyOfScale();
 				break;
 			case '2':
-				armyMobilization(mobilization);
+				citizenship[0] = citizenshipLaw();
+				citizenship[1] = citizenship[0];
 				break;
 			case '3':
-				nationalMarket(good);
+				citizenship[1] = citizenshipLaw();
 				break;
 			case '4':
+				armyMobilization(mobilization);
+				break;
+			case '5':
+				nationalMarket(good);
+				break;
+			case '6':
 				do {
 					system("cls");
 					cout << "Confirm Market Data Reset (y/n): ";
@@ -7915,19 +7965,19 @@ void nationalMenu(goodsType good[GSIZE], float& eosCap, bool mobilization[ASIZE]
 				break;
 			default:
 				system("cls");
-				cout << "Error choose 0-4\n\n";
+				cout << "Error choose 0-6\n\n";
 				system("pause");
 			}
 		}
 		else {
 			system("cls");
-			cout << "Error choose 0-4\n\n";
+			cout << "Error choose 0-6\n\n";
 			system("pause");
 		}
 	} while (!exit);
 }
 
-void nationalMenu(goodsType good[GSIZE], int& states, float& eosCap, bool mobilization[ASIZE][2])
+void nationalMenu(goodsType good[GSIZE], int& states, float& eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	string in;
 	char choice;
@@ -7939,12 +7989,50 @@ void nationalMenu(goodsType good[GSIZE], int& states, float& eosCap, bool mobili
 		system("cls");
 
 		cout << "Number of Owned States: " << states << endl
-			 << "Maximum Economy of Scale: " << (eosCap - 1) * 100 << "%\n\n"
+			 << "Maximum Economy of Scale: " << (eosCap - 1) * 100 << "%\n"
+			 << "Citizenship Law: ";
+		switch (citizenship[0]) {
+		case 1:
+			cout << "National Supremacy";
+			break;
+		case 2:
+			cout << "Racial Segregation";
+			break;
+		case 3:
+			cout << "Cultural Exclusion";
+			break;
+		case 4:
+			cout << "Multiculturalism";
+			break;
+		default:
+			cout << "Ethnostate";
+		}
+		cout << endl
+			 << "New Citizenship Law: ";
+		switch (citizenship[1]) {
+		case 1:
+			cout << "National Supremacy";
+			break;
+		case 2:
+			cout << "Racial Segregation";
+			break;
+		case 3:
+			cout << "Cultural Exclusion";
+			break;
+		case 4:
+			cout << "Multiculturalism";
+			break;
+		default:
+			cout << "Ethnostate";
+		}
+		cout << endl << endl
 			 << "1. Set Number of Owned States\n"
 			 << "2. Set Maximum Economy of Scale\n"
-			 << "3. Set Army Mobilization\n"
-			 << "4. National Market\n"
-			 << "5. Reset Market Data\n"
+			 << "3. Set Citizenship Law\n"
+			 << "4. Set New Citizenship Law\n"
+			 << "5. Set Army Mobilization\n"
+			 << "6. National Market\n"
+			 << "7. Reset Market Data\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
 		getline(cin, in);
@@ -7979,12 +8067,19 @@ void nationalMenu(goodsType good[GSIZE], int& states, float& eosCap, bool mobili
 				eosCap = economyOfScale();
 				break;
 			case '3':
-				armyMobilization(mobilization);
+				citizenship[0] = citizenshipLaw();
+				citizenship[1] = citizenship[0];
 				break;
 			case '4':
-				nationalMarket(good, 1 / float(states));
+				citizenship[1] = citizenshipLaw();
 				break;
 			case '5':
+				armyMobilization(mobilization);
+				break;
+			case '6':
+				nationalMarket(good, 1 / float(states));
+				break;
+			case '7':
 				do {
 					system("cls");
 					cout << "Confirm Market Data Reset (y/n): ";
@@ -8015,13 +8110,13 @@ void nationalMenu(goodsType good[GSIZE], int& states, float& eosCap, bool mobili
 				break;
 			default:
 				system("cls");
-				cout << "Error choose 0-5\n\n";
+				cout << "Error choose 0-7\n\n";
 				system("pause");
 			}
 		}
 		else {
 			system("cls");
-			cout << "Error choose 0-5\n\n";
+			cout << "Error choose 0-7\n\n";
 			system("pause");
 		}
 	} while (!exit);
@@ -8776,6 +8871,47 @@ void armyMobilization(bool mobilization[ASIZE][2])
 			system("pause");
 		}
 	} while (!exit);
+}
+
+int citizenshipLaw()
+{
+	string in;
+	char choice;
+	system("cls");
+
+	cout << "1. Set Citizenship Law to Ethnostate\n"
+		 << "2. Set Citizenship Law to National Supremacy\n"
+		 << "3. Set Citizenship Law to Racial Segregation\n"
+		 << "4. Set Citizenship Law to Cultural Exclusion\n"
+		 << "5. Set Citizenship Law to Multiculturalism\n"
+		 << "Enter your choice: ";
+	getline(cin, in);
+	if (in.length() == 1) {
+		choice = in[0];
+		switch (choice) {
+		case '1':
+			return 0;
+		case '2':
+			return 1;
+		case '3':
+			return 2;
+		case '4':
+			return 3;
+		case '5':
+			return 4;
+		default:
+			system("cls");
+			cout << "Error choose 1-5\n\n";
+			system("pause");
+			return citizenshipLaw();
+		}
+	}
+	else {
+		system("cls");
+		cout << "Error choose 1-5\n\n";
+		system("pause");
+		return citizenshipLaw();
+	}
 }
 
 void nationalMarket(goodsType good[GSIZE])
@@ -10573,7 +10709,6 @@ void selectBuilding(buildingsType building[BSIZE])
 			exit = true;
 		}
 		else {
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			stateBuildingData(building, choice - 1);
 		}
 	} while (!exit);
@@ -10582,8 +10717,7 @@ void selectBuilding(buildingsType building[BSIZE])
 void stateBuildingData(buildingsType building[BSIZE], int it)
 {
 	bool eosOverride = false;
-	string in;
-	char choice;
+	int choice;
 	float fIn;
 	bool exit = false;
 
@@ -10603,6 +10737,10 @@ void stateBuildingData(buildingsType building[BSIZE], int it)
 			cout << trunc1D(building[it].getThroughput(1) * 100);
 		else {
 			cout << trunc1D(building[it].getThroughput(3) * 100);
+			if (building[it].buildable() && !building[it].autoSubsidized()) {
+				cout << "%\n"
+					 << building[it].getBuilding() << " Company Throughput: " << trunc1D(building[it].getThroughput(5) * 100);
+			}
 		}
 		cout << "%\n"
 			 << building[it].getBuilding() << " New Throughput: ";
@@ -10610,74 +10748,131 @@ void stateBuildingData(buildingsType building[BSIZE], int it)
 			cout << trunc1D(building[it].getThroughput(2) * 100);
 		else {
 			cout << trunc1D(building[it].getThroughput(4) * 100);
+			if (building[it].buildable() && !building[it].autoSubsidized()) {
+				cout << "%\n"
+					 << building[it].getBuilding() << " New Company Throughput: " << trunc1D(building[it].getThroughput(6) * 100);
+			}
 		}
+		int i = 4;
 		cout << "%\n"
 			 << "Base Wage: $" << building[it].getBaseWage() << endl << endl
 			 << "1. Toggle Economy of Scale Override\n"
 			 << "2. Set " << building[it].getBuilding() << " Throughput after One Construction\n"
-			 << "3. Set " << building[it].getBuilding() << " Throughput\n"
-			 << "4. Set " << building[it].getBuilding() << " New Throughput\n"
-			 << "5. Set Base Wage\n"
+			 << "3. Set " << building[it].getBuilding() << " Throughput\n";
+		if (!eosOverride && building[it].buildable() && !building[it].autoSubsidized())
+			cout << i++ << ". Set " << building[it].getBuilding() << " Company Throughput\n";
+		cout << i++ << ". Set " << building[it].getBuilding() << " New Throughput\n";
+		if (!eosOverride && building[it].buildable() && !building[it].autoSubsidized())
+			cout << i++ << ". Set " << building[it].getBuilding() << " New Company Throughput\n";
+		cout << i << ". Set Base Wage\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
-		getline(cin, in);
-		if (in.length() == 1) {
-			choice = in[0];
-			switch (choice) {
-			case '0':
-				exit = true;
-				break;
-			case '1':
-				if (eosOverride)
-					eosOverride = false;
-				else {
-					eosOverride = true;
-				}
-				break;
-			case '2':
+		cin >> choice;
+
+		if (!cin) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			system("cls");
+			cout << "Error choose 0-" << i << endl << endl;
+			system("pause");
+		}
+		else if (choice < 0 || choice > i) {
+			system("cls");
+			cout << "Error choose 0-" << i << endl << endl;
+			system("pause");
+		}
+		else if (choice == 0)
+			exit = true;
+		else if (choice == 1) {
+			if (eosOverride)
+				eosOverride = false;
+			else {
+				eosOverride = true;
+			}
+		}
+		else if (choice == 2) {
+			system("cls");
+			cout << "Enter " << building[it].getBuilding() << " Throughput after One Construction (%): ";
+			cin >> fIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				system("cls");
-				cout << "Enter " << building[it].getBuilding() << " Throughput after One Construction (%): ";
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else {
+				building[it].setThroughput(fIn / 100, 0);
+			}
+		}
+		else if (choice == 3) {
+			system("cls");
+			cout << "Enter " << building[it].getBuilding() << " Throughput (%): ";
+			cin >> fIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else if (eosOverride) {
+				building[it].setThroughput(fIn / 100, 1);
+				building[it].setThroughput(building[it].getThroughput(1), 2);
+			}
+			else {
+				building[it].setThroughput(fIn / 100, 3);
+				building[it].setThroughput(building[it].getThroughput(3), 4);
+			}
+		}
+		else if (choice == i) {
+			system("cls");
+			cout << "Enter Base Wage: ";
+			cin >> fIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else if (fIn < 0) {
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else {
+				building[it].setBaseWage(fIn);
+			}
+		}
+		else if (!eosOverride && building[it].buildable() && !building[it].autoSubsidized()) {
+			if (choice == --i) {
+				system("cls");
+				cout << "Enter " << building[it].getBuilding() << " New Company Throughput (%): ";
 				cin >> fIn;
 
 				if (!cin) {
 					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					system("cls");
 					cout << "Error invalid input\n\n";
 					system("pause");
 				}
 				else {
-					building[it].setThroughput(fIn / 100, 0);
+					building[it].setThroughput(fIn / 100, 6);
 				}
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				break;
-			case '3':
-				system("cls");
-				cout << "Enter " << building[it].getBuilding() << " Throughput (%): ";
-				cin >> fIn;
-
-				if (!cin) {
-					cin.clear();
-					system("cls");
-					cout << "Error invalid input\n\n";
-					system("pause");
-				}
-				else if (eosOverride) {
-					building[it].setThroughput(fIn / 100, 1);
-					building[it].setThroughput(building[it].getThroughput(1), 2);
-				}
-				else {
-					building[it].setThroughput(fIn / 100, 3);
-					building[it].setThroughput(building[it].getThroughput(3), 4);
-				}
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				break;
-			case '4':
+			}
+			else if (choice == --i) {
 				system("cls");
 				cout << "Enter " << building[it].getBuilding() << " New Throughput (%): ";
 				cin >> fIn;
 
 				if (!cin) {
 					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					system("cls");
 					cout << "Error invalid input\n\n";
 					system("pause");
@@ -10687,39 +10882,42 @@ void stateBuildingData(buildingsType building[BSIZE], int it)
 				else {
 					building[it].setThroughput(fIn / 100, 4);
 				}
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				break;
-			case '5':
+			}
+			else {
 				system("cls");
-				cout << "Enter Base Wage: ";
+				cout << "Enter " << building[it].getBuilding() << " Company Throughput (%): ";
 				cin >> fIn;
 
 				if (!cin) {
 					cin.clear();
-					system("cls");
-					cout << "Error invalid input\n\n";
-					system("pause");
-				}
-				else if (fIn < 0) {
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					system("cls");
 					cout << "Error invalid input\n\n";
 					system("pause");
 				}
 				else {
-					building[it].setBaseWage(fIn);
+					building[it].setThroughput(fIn / 100, 5);
+					building[it].setThroughput(building[it].getThroughput(5), 6);
 				}
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				break;
-			default:
-				system("cls");
-				cout << "Error choose 0-5\n\n";
-				system("pause");
 			}
 		}
 		else {
 			system("cls");
-			cout << "Error choose 0-5\n\n";
-			system("pause");
+			cout << "Enter " << building[it].getBuilding() << " New Throughput (%): ";
+			cin >> fIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else if (eosOverride)
+				building[it].setThroughput(fIn / 100, 2);
+			else {
+				building[it].setThroughput(fIn / 100, 4);
+			}
 		}
 	} while (!exit);
 }
@@ -11946,7 +12144,7 @@ void productionProfit(goodsType good, float mapi, float output, float purchaseWe
 	system("pause");
 }
 
-void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2])
+void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	bool cancel = false;
 	int it[BSIZE - 1];
@@ -12110,7 +12308,7 @@ void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsTy
 				}
 			}
 			else {
-				sectorsImportsCanceled(good, method, building, location, profession, mapi, eosCap, mobilization, it[choice - 7]);
+				sectorsImportsCanceled(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, it[choice - 7]);
 				for (int i = 0; i < BSIZE - 1; i++)
 					it[i] = i;
 			}
@@ -12265,7 +12463,7 @@ void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsTy
 				}
 			}
 			else {
-				sectors(good, method, building, location, profession, mapi, eosCap, mobilization, it[choice - 7]);
+				sectors(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, it[choice - 7]);
 				for (int i = 0; i < BSIZE - 1; i++)
 					it[i] = i;
 			}
@@ -12273,7 +12471,7 @@ void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsTy
 	} while (!exit);
 }
 
-void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2])
+void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	bool cancel = false;
 	int it[BSIZE - 1];
@@ -12437,7 +12635,7 @@ void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsTy
 				}
 			}
 			else {
-				sectorsImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, it[choice - 7]);
+				sectorsImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, it[choice - 7]);
 				for (int i = 0; i < BSIZE - 1; i++)
 					it[i] = i;
 			}
@@ -12592,7 +12790,7 @@ void buildings(goodsType good[GSIZE], productionMethodsType& method, buildingsTy
 				}
 			}
 			else {
-				sectors(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, it[choice - 7]);
+				sectors(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, it[choice - 7]);
 				for (int i = 0; i < BSIZE - 1; i++)
 					it[i] = i;
 			}
@@ -13196,7 +13394,7 @@ float productivityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 	return 52 * profit / workers;
 }
 
-void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int it)
+void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int it)
 {
 	int choice;
 	bool exit = false;
@@ -13290,12 +13488,12 @@ void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 			exit = true;
 		}
 		else {
-			construction(good, method, building, location, profession, mapi, eosCap, mobilization, it, choice + building[it].getBuildingLocation() - 1);
+			construction(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, it, choice + building[it].getBuildingLocation() - 1);
 		}
 	} while (!exit);
 }
 
-void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int it)
+void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int it)
 {
 	int choice;
 	bool exit = false;
@@ -13389,12 +13587,12 @@ void sectors(goodsType good[GSIZE], productionMethodsType& method, buildingsType
 			exit = true;
 		}
 		else {
-			construction(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, it, choice + building[it].getBuildingLocation() - 1);
+			construction(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, it, choice + building[it].getBuildingLocation() - 1);
 		}
 	} while (!exit);
 }
 
-void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int it)
+void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int it)
 {
 	int choice;
 	bool exit = false;
@@ -13488,12 +13686,12 @@ void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method
 			exit = true;
 		}
 		else {
-			constructionImportsCanceled(good, method, building, location, profession, mapi, eosCap, mobilization, it, choice + building[it].getBuildingLocation() - 1);
+			constructionImportsCanceled(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, it, choice + building[it].getBuildingLocation() - 1);
 		}
 	} while (!exit);
 }
 
-void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int it)
+void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int it)
 {
 	int choice;
 	bool exit = false;
@@ -13587,7 +13785,7 @@ void sectorsImportsCanceled(goodsType good[GSIZE], productionMethodsType& method
 			exit = true;
 		}
 		else {
-			constructionImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, it, choice + building[it].getBuildingLocation() - 1);
+			constructionImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, it, choice + building[it].getBuildingLocation() - 1);
 		}
 	} while (!exit);
 }
@@ -13792,7 +13990,7 @@ float productivityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 	return 52 * profitImportsCanceled(good, method, building, location, mapi, gdp, averageGdp, mobilization, bIt, lIt) / workers;
 }
 
-void construction(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void construction(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	bool eosOverride = false;
 	int choice;
@@ -13963,9 +14161,9 @@ void construction(goodsType good[GSIZE], productionMethodsType& method, building
 				}
 			}
 			if (eosOverride)
-				stateEoSOverride(good, method, building, location, profession, mapi, eosCap, mobilization, bIt, lIt);
+				stateEoSOverride(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, bIt, lIt);
 			else {
-				state(good, method, building, location, profession, mapi, eosCap, mobilization, bIt, lIt);
+				state(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, bIt, lIt);
 			}
 		}
 		else if (choice == i--) {
@@ -14141,7 +14339,7 @@ void construction(goodsType good[GSIZE], productionMethodsType& method, building
 	} while (!exit);
 }
 
-void construction(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void construction(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	bool eosOverride = false;
 	int choice;
@@ -14312,9 +14510,9 @@ void construction(goodsType good[GSIZE], productionMethodsType& method, building
 				}
 			}
 			if (eosOverride)
-				stateEoSOverride(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, bIt, lIt);
+				stateEoSOverride(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, bIt, lIt);
 			else {
-				state(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, bIt, lIt);
+				state(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, bIt, lIt);
 			}
 		}
 		else if (choice == i--) {
@@ -14490,7 +14688,7 @@ void construction(goodsType good[GSIZE], productionMethodsType& method, building
 	} while (!exit);
 }
 
-void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	bool eosOverride = false;
 	int choice;
@@ -14661,9 +14859,9 @@ void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& m
 				}
 			}
 			if (eosOverride)
-				stateEoSOverrideImportsCanceled(good, method, building, location, profession, mapi, eosCap, mobilization, bIt, lIt);
+				stateEoSOverrideImportsCanceled(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, bIt, lIt);
 			else {
-				stateImportsCanceled(good, method, building, location, profession, mapi, eosCap, mobilization, bIt, lIt);
+				stateImportsCanceled(good, method, building, location, profession, mapi, eosCap, citizenship, mobilization, bIt, lIt);
 			}
 		}
 		else if (choice == i--) {
@@ -14839,7 +15037,7 @@ void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& m
 	} while (!exit);
 }
 
-void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	bool eosOverride = false;
 	int choice;
@@ -15010,9 +15208,9 @@ void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& m
 				}
 			}
 			if (eosOverride)
-				stateEoSOverrideImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, bIt, lIt);
+				stateEoSOverrideImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, bIt, lIt);
 			else {
-				stateImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, mobilization, bIt, lIt);
+				stateImportsCanceled(good, method, building, location, profession, mapi, gdp, averageGdp, eosCap, citizenship, mobilization, bIt, lIt);
 			}
 		}
 		else if (choice == i--) {
@@ -15188,31 +15386,36 @@ void constructionImportsCanceled(goodsType good[GSIZE], productionMethodsType& m
 	} while (!exit);
 }
 
-void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
-	int level[5] = { location[lIt].getLevel(), 0, 0, 1, 0};
+	int level[7] = { location[lIt].getLevel(), 0, 0, 0, 1, 0, 0 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	float throughput[2];
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float cost[2] = { 0 };
@@ -15287,8 +15490,11 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 		cout << building[bIt].getBuilding() << endl
 			 << "State Level: " << level[0] << endl
 			 << "Level: " << level[1] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << "Nationalized Level: " << level[2] << endl;
+			if (building[bIt].getThroughput(5) != 0)
+				cout << "Company Owned Level: " << level[3] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -15307,9 +15513,12 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			}
 		}
 		cout << endl
-			 << "Level: " << level[3] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
-			cout << "Nationalized Level: " << level[4] << endl;
+			 << "Level: " << level[4] << endl;
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
+			cout << "Nationalized Level: " << level[5] << endl;
+			if (building[bIt].getThroughput(6) != 0)
+				cout << "Company Owned Level: " << level[6] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -15327,19 +15536,13 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
-		if (building[bIt].getInfrastructureUsage(level[3] - level[1]) > 0)
-			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
-		else if (building[bIt].getInfrastructureUsage(level[3] - level[1]) < 0)
-			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
+		cout << endl;
+		if (building[bIt].getInfrastructureUsage(level[4] - level[1]) > 0)
+			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
+		else if (building[bIt].getInfrastructureUsage(level[4] - level[1]) < 0)
+			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -15401,7 +15604,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				}
 			}
 		}
-		if (level[3] > 0) {
+		if (level[4] > 0) {
 			if (wage[1] != 0) {
 				cout << "Profit: $" << trunc2D(profit[1][0] - wage[1]) << endl;
 				if (building[bIt].getBuilding() == "Construction Sector") {
@@ -15437,7 +15640,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << "Productivity: $" << trunc2D(52 * profit[1][0] / workers[1]) << endl;
 				if (building[bIt].buildable()) {
 					cout << "Productivity/Construction: $" << trunc2D(26000 * profit[1][0] / workers[1] / building[bIt].getConstructionCost()) << endl
-						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[3] / building[bIt].getConstructionCost()) << endl;
+						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[4] / building[bIt].getConstructionCost()) << endl;
 				}
 			}
 		}
@@ -15479,11 +15682,17 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 		cout << endl
 			 << "1. Set State Level\n"
 			 << "2. Set Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set Nationalized Level\n";
+			if (building[bIt].getThroughput(5) != 0)
+				cout << i++ << ". Set Company Owned Level\n";
+		}
 		cout << i++ << ". Set New Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set New Nationalized Level\n";
+			if (building[bIt].getThroughput(6) != 0)
+				cout << i++ << ". Set New Company Owned Level\n";
+		}
 		for (int j = 0; j < building[bIt].getSize(); j++) {
 			if (method.getSize(j + building[bIt].getProductionMethod()) > 1) {
 				pm[it++] = j;
@@ -15493,8 +15702,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -15516,159 +15724,46 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			exit = true;
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitability(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[3], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitability(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[4], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
-
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
+			
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			if (choice == 1) {
@@ -15697,82 +15792,58 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						if (iIn < level[2])
 							level[2] = iIn;
 					}
+					if (iIn < level[3])
+						level[3] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < 2; i++)
 						workers[i] = 0;
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
-						}
 						for (int j = 0; j < 2; j++) {
-							undiscriminated[i][j] = baseUndiscriminated[i];
-							discriminated[i][j] = 0;
+							accepted[i][j] = 0;
+							citizen[i][j] = 0;
+							prejudice[i][j] = 0;
+							erasure[i][j] = 0;
+							hostile[i][j] = 0;
 						}
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						for (int j = 0; j < 2; j++) {
+							if (accepted[i][j] < 0)
+								accepted[i][j] = 0;
+							workers[j] += accepted[i][j];
 						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						for (int j = 0; j < 2; j++)
-							workers[j] += undiscriminated[i][j] + discriminated[i][j];
 					}
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
-						wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+						wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -15782,8 +15853,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -15841,87 +15912,79 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						level[0] = iIn;
 						workers[1] = 0;
 
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							baseUndiscriminated[i] = 0;
-							baseDiscriminated[i] = 0;
+							baseAccepted[i] = 0;
+							baseCitizen[i] = 0;
+							basePrejudice[i] = 0;
+							baseErasure[i] = 0;
+							baseHostile[i] = 0;
+							accepted[i][1] = 0;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 
-							if (level[0] > 0) {
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (baseUndiscriminated[i] < 0)
-									baseUndiscriminated[i] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+								accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							}
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = 0;
+							if (baseAccepted[i] < 0)
+								baseAccepted[i] = 0;
+							if (accepted[i][1] < 0)
+								accepted[i][1] = 0;
+							workers[1] += accepted[i][1];
 						}
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][1] += profession;
-							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
-						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
 					else if (iIn < level[2])
 						level[2] = iIn;
+					else if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
-						undiscriminated[i][0] = baseUndiscriminated[i];
-						discriminated[i][0] = baseDiscriminated[i];
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+						int profession = 0;
 
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++)
+							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						if (profession < 0)
+							profession = 0;
+						if (employees == 0) {
+							accepted[i][0] = profession;
+							citizen[i][0] = 0;
+							prejudice[i][0] = 0;
+							erasure[i][0] = 0;
+							hostile[i][0] = 0;
 						}
+						else {
+							accepted[i][0] = float(profession) / employees * baseAccepted[i];
+							citizen[i][0] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+							erasure[i][0] = float(profession) / employees * baseErasure[i];
+							hostile[i][0] = float(profession) / employees * baseHostile[i];
+						}
+						workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 					}
-					for (i = 0; i < PSIZE; i++)
-						workers[0] += undiscriminated[i][0] + discriminated[i][0];
-					wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+					wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -15931,8 +15994,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -15994,87 +16057,72 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 							workers[1] = 0;
 
 							for (i = 0; i < PSIZE; i++) {
-								baseUndiscriminated[i] = 0;
-								baseDiscriminated[i] = 0;
+								baseAccepted[i] = 0;
+								baseCitizen[i] = 0;
+								basePrejudice[i] = 0;
+								baseErasure[i] = 0;
+								baseHostile[i] = 0;
+								accepted[i][1] = 0;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 
-								if (level[0] > 0) {
-									for (int j = 0; j < building[bIt].getSize(); j++)
-										baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-									if (baseUndiscriminated[i] < 0)
-										baseUndiscriminated[i] = 0;
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+									accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 								}
-								undiscriminated[i][1] = baseUndiscriminated[i];
-								discriminated[i][1] = 0;
+								if (baseAccepted[i] < 0)
+									baseAccepted[i] = 0;
+								if (accepted[i][1] < 0)
+									accepted[i][1] = 0;
+								workers[1] += accepted[i][1];
 							}
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
-
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][1] + discriminated[i][1];
-
-								if (discrimination) {
-									discriminated[i][1] += profession;
-
-									if (discriminated[i][1] < 0) {
-										undiscriminated[i][1] -= discriminated[i][1];
-										discriminated[i][1] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][1] += profession;
-								}
-								if (undiscriminated[i][1] < 0)
-									undiscriminated[i][1] = 0;
-								workers[1] += undiscriminated[i][1] + discriminated[i][1];
-							}
-							wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 						}
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							undiscriminated[i][0] = baseUndiscriminated[i];
-							discriminated[i][0] = baseDiscriminated[i];
-						}
-						if (level[0] != level[1]) {
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
 
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][0] + discriminated[i][0];
-
-								if (discrimination) {
-									discriminated[i][0] += profession;
-
-									if (discriminated[i][0] < 0) {
-										undiscriminated[i][0] -= discriminated[i][0];
-										discriminated[i][0] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][0] += profession;
-								}
-								if (undiscriminated[i][0] < 0)
-									undiscriminated[i][0] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][0] = profession;
+								citizen[i][0] = 0;
+								prejudice[i][0] = 0;
+								erasure[i][0] = 0;
+								hostile[i][0] = 0;
 							}
+							else {
+								accepted[i][0] = float(profession) / employees * baseAccepted[i];
+								citizen[i][0] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+								erasure[i][0] = float(profession) / employees * baseErasure[i];
+								hostile[i][0] = float(profession) / employees * baseHostile[i];
+							}
+							workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 						}
-						for (i = 0; i < PSIZE; i++)
-							workers[0] += undiscriminated[i][0] + discriminated[i][0];
-						wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
-						throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+						wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 						if (throughput[1] > eosCap)
 							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
 						for (i = 0; i < GSIZE; i++) {
 							good[i].setInput(1);
 							good[i].setOutput(1);
 
 							for (int j = 0; j < building[bIt].getSize(); j++) {
-								good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-								good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 							}
 							good[i].setInputOutput(1);
 						}
@@ -16083,6 +16131,11 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 
 					if (throughput[0] > eosCap)
 						throughput[0] = eosCap;
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
 					for (i = 0; i < 2; i++) {
 						cost[i] = 0;
 						income[i] = 0;
@@ -16125,6 +16178,510 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(5) != 0) {
+				if (choice == 4) {
+					system("cls");
+					cout << "Enter Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0])
+							iIn = level[0];
+						level[3] = iIn;
+
+						if (level[0] != 0) {
+							throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
+
+							if (throughput[0] > eosCap)
+								throughput[0] = eosCap;
+							throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+
+							for (i = 0; i < 2; i++) {
+								cost[i] = 0;
+								income[i] = 0;
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(0);
+								good[i].setOutput(0);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
+									good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
+								}
+								good[i].setInputOutput(0);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[0] += good[i].getInput(0) * good[i].getMarketPrice();
+									income[0] += good[i].getOutput(0) * good[i].getMarketPrice();
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[0] += good[i].getInput(0) * good[i].getLocalPrice(mapi);
+									income[0] += good[i].getOutput(0) * good[i].getLocalPrice(mapi);
+									cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								}
+							}
+							for (i = 0; i < 2; i++) {
+								profit[i][0] = income[i] - cost[i];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[i][1] = income[i] - cost[i] * 0.9;
+									profit[i][2] = income[i] - cost[i] * 0.75;
+									profit[i][3] = income[i] - cost[i] * 0.65;
+									profit[i][4] = income[i] - cost[i] * 0.5;
+									profit[i][5] = income[i] - cost[i] * 0.25;
+								}
+							}
+						}
+					}
+				}
+				else if (choice == 5) {
+					system("cls");
+					cout << "Enter New Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[4] = iIn;
+						workers[1] = 0;
+						
+						if (iIn < level[5])
+							level[5] = iIn;
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (choice == 6) {
+					system("cls");
+					cout << "Enter New Nationalized Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[5] = iIn;
+
+						if (iIn > level[4]) {
+							level[4] = iIn;
+							workers[1] = 0;
+							
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						}
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (building[bIt].getThroughput(6) != 0) {
+					if (choice == 7) {
+						system("cls");
+						cout << "Enter New Company Owned Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 0) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							if (iIn > level[0] + level[4] - level[1])
+								iIn = level[0] + level[4] - level[1];
+							level[6] = iIn;
+							
+							if (level[0] + level[4] != level[1]) {
+								throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+								if (throughput[1] > eosCap)
+									throughput[1] = eosCap;
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+								cost[1] = 0;
+								income[1] = 0;
+
+								for (i = 0; i < GSIZE; i++) {
+									good[i].setInput(1);
+									good[i].setOutput(1);
+
+									for (int j = 0; j < building[bIt].getSize(); j++) {
+										good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+										good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+									}
+									good[i].setInputOutput(1);
+									input[i] = good[i].getInput(1) - good[i].getInput(0);
+									output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+									if (good[i].localGood()) {
+										cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+										income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+									}
+									else {
+										cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+										income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+									}
+								}
+								profit[1][0] = income[1] - cost[1];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[1][1] = income[1] - cost[1] * 0.9;
+									profit[1][2] = income[1] - cost[1] * 0.75;
+									profit[1][3] = income[1] - cost[1] * 0.65;
+									profit[1][4] = income[1] - cost[1] * 0.5;
+									profit[1][5] = income[1] - cost[1] * 0.25;
+								}
+							}
+						}
+					}
+					else {
+						system("cls");
+						cout << "Enter " << method.getProductionMethod(pm[choice - 8] + building[bIt].getProductionMethod()) << " Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 1 || iIn > method.getSize(pm[choice - 8] + building[bIt].getProductionMethod())) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							methodLevel[pm[choice - 8]] = iIn - 1;
+							workers[1] = 0;
+
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+							cost[1] = 0;
+							income[1] = 0;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							if (level[0] + level[4] != level[1])
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							else {
+								throughput[1] += building[bIt].getThroughput(6);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else if (choice == 4) {
 				system("cls");
 				cout << "Enter New Level: ";
@@ -16143,51 +16700,56 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					system("pause");
 				}
 				else {
-					level[3] = iIn;
+					level[4] = iIn;
 					workers[1] = 0;
 
-					if (iIn < level[4])
-						level[4] = iIn;
+					if (iIn < level[5])
+						level[5] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16231,53 +16793,56 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					system("pause");
 				}
 				else {
-					level[4] = iIn;
+					level[5] = iIn;
 
-					if (iIn > level[3]) {
-						level[3] = iIn;
+					if (iIn > level[4]) {
+						level[4] = iIn;
 						workers[1] = 0;
-
+						
 						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 							int profession = 0;
 
 							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							if (profession < 0)
 								profession = 0;
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = baseDiscriminated[i];
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 							}
 							else {
-								undiscriminated[i][1] += profession;
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
 							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16303,6 +16868,161 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(6) != 0) {
+				if (choice == 6) {
+					system("cls");
+					cout << "Enter New Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0] + level[4] - level[1])
+							iIn = level[0] + level[4] - level[1];
+						level[6] = iIn;
+						
+						if (level[0] + level[4] != level[1]) {
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							cost[1] = 0;
+							income[1] = 0;
+
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPrice(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else {
 				system("cls");
 				cout << "Enter " << method.getProductionMethod(pm[choice - 6] + building[bIt].getProductionMethod()) << " Level: ";
@@ -16325,45 +17045,48 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16415,75 +17138,37 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -16499,8 +17184,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -16560,78 +17245,54 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
+						accepted[i][1] = 0;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-						for (int j = 0; j < 2; j++) {
-							undiscriminated[i][j] = baseUndiscriminated[i];
-							discriminated[i][j] = 0;
-						}
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						if (accepted[i][1] < 0)
+							accepted[i][1] = 0;
+						workers[1] += accepted[i][1];
 					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
-					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				}
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -16639,7 +17300,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				}
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -16653,8 +17314,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -16733,41 +17394,39 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				system("pause");
 			}
 			else {
-				level[3] = iIn;
+				level[4] = iIn;
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -16776,8 +17435,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16799,8 +17458,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16838,37 +17497,35 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+					profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
-			
+
 			if (building[bIt].hasEOS()) {
-				throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+				throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 				if (throughput[1] > eosCap)
 					throughput[1] = eosCap;
@@ -16877,8 +17534,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16900,8 +17557,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -16949,37 +17606,35 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -16988,8 +17643,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -17011,8 +17666,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -17042,31 +17697,36 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 	} while (!exit);
 }
 
-void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
-	int level[5] = { location[lIt].getLevel(), 0, 0, 1, 0 };
+	int level[7] = { location[lIt].getLevel(), 0, 0, 0, 1, 0, 0 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	float throughput[2];
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float purchaseWeight[GSIZE];
@@ -17139,8 +17799,11 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 		cout << building[bIt].getBuilding() << endl
 			 << "State Level: " << level[0] << endl
 			 << "Level: " << level[1] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << "Nationalized Level: " << level[2] << endl;
+			if (building[bIt].getThroughput(5) != 0)
+				cout << "Company Owned Level: " << level[3] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -17159,9 +17822,12 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			}
 		}
 		cout << endl
-			 << "Level: " << level[3] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
-			cout << "Nationalized Level: " << level[4] << endl;
+			 << "Level: " << level[4] << endl;
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
+			cout << "Nationalized Level: " << level[5] << endl;
+			if (building[bIt].getThroughput(6) != 0)
+				cout << "Company Owned Level: " << level[6] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -17179,19 +17845,13 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
-		if (building[bIt].getInfrastructureUsage(level[3] - level[1]) > 0)
-			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
-		else if (building[bIt].getInfrastructureUsage(level[3] - level[1]) < 0)
-			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
+		cout << endl;
+		if (building[bIt].getInfrastructureUsage(level[4] - level[1]) > 0)
+			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
+		else if (building[bIt].getInfrastructureUsage(level[4] - level[1]) < 0)
+			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -17253,7 +17913,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				}
 			}
 		}
-		if (level[3] > 0) {
+		if (level[4] > 0) {
 			if (wage[1] != 0) {
 				cout << "Profit: $" << trunc2D(profit[1][0] - wage[1]) << endl;
 				if (building[bIt].getBuilding() == "Construction Sector") {
@@ -17289,7 +17949,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << "Productivity: $" << trunc2D(52 * profit[1][0] / workers[1]) << endl;
 				if (building[bIt].buildable()) {
 					cout << "Productivity/Construction: $" << trunc2D(26000 * profit[1][0] / workers[1] / building[bIt].getConstructionCost()) << endl
-						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[3] / building[bIt].getConstructionCost()) << endl;
+						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[4] / building[bIt].getConstructionCost()) << endl;
 				}
 			}
 		}
@@ -17331,11 +17991,17 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 		cout << endl
 			 << "1. Set State Level\n"
 			 << "2. Set Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set Nationalized Level\n";
+			if (building[bIt].getThroughput(5) != 0)
+				cout << i++ << ". Set Company Owned Level\n";
+		}
 		cout << i++ << ". Set New Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set New Nationalized Level\n";
+			if (building[bIt].getThroughput(6) != 0)
+				cout << i++ << ". Set New Company Owned Level\n";
+		}
 		for (int j = 0; j < building[bIt].getSize(); j++) {
 			if (method.getSize(j + building[bIt].getProductionMethod()) > 1) {
 				pm[it++] = j;
@@ -17345,8 +18011,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -17368,159 +18033,46 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			exit = true;
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitability(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[3], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitability(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[4], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			if (choice == 1) {
@@ -17549,82 +18101,58 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						if (iIn < level[2])
 							level[2] = iIn;
 					}
+					if (iIn < level[3])
+						level[3] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < 2; i++)
 						workers[i] = 0;
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
-						}
 						for (int j = 0; j < 2; j++) {
-							undiscriminated[i][j] = baseUndiscriminated[i];
-							discriminated[i][j] = 0;
+							accepted[i][j] = 0;
+							citizen[i][j] = 0;
+							prejudice[i][j] = 0;
+							erasure[i][j] = 0;
+							hostile[i][j] = 0;
 						}
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						for (int j = 0; j < 2; j++) {
+							if (accepted[i][j] < 0)
+								accepted[i][j] = 0;
+							workers[j] += accepted[i][j];
 						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						for (int j = 0; j < 2; j++)
-							workers[j] += undiscriminated[i][j] + discriminated[i][j];
 					}
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
-						wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+						wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -17634,8 +18162,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -17697,87 +18225,79 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						level[0] = iIn;
 						workers[1] = 0;
 
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							baseUndiscriminated[i] = 0;
-							baseDiscriminated[i] = 0;
+							baseAccepted[i] = 0;
+							baseCitizen[i] = 0;
+							basePrejudice[i] = 0;
+							baseErasure[i] = 0;
+							baseHostile[i] = 0;
+							accepted[i][1] = 0;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 
-							if (level[0] > 0) {
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (baseUndiscriminated[i] < 0)
-									baseUndiscriminated[i] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+								accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							}
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = 0;
+							if (baseAccepted[i] < 0)
+								baseAccepted[i] = 0;
+							if (accepted[i][1] < 0)
+								accepted[i][1] = 0;
+							workers[1] += accepted[i][1];
 						}
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][1] += profession;
-							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
-						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
 					else if (iIn < level[2])
 						level[2] = iIn;
+					else if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
-						undiscriminated[i][0] = baseUndiscriminated[i];
-						discriminated[i][0] = baseDiscriminated[i];
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+						int profession = 0;
 
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++)
+							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						if (profession < 0)
+							profession = 0;
+						if (employees == 0) {
+							accepted[i][0] = profession;
+							citizen[i][0] = 0;
+							prejudice[i][0] = 0;
+							erasure[i][0] = 0;
+							hostile[i][0] = 0;
 						}
+						else {
+							accepted[i][0] = float(profession) / employees * baseAccepted[i];
+							citizen[i][0] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+							erasure[i][0] = float(profession) / employees * baseErasure[i];
+							hostile[i][0] = float(profession) / employees * baseHostile[i];
+						}
+						workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 					}
-					for (i = 0; i < PSIZE; i++)
-						workers[0] += undiscriminated[i][0] + discriminated[i][0];
-					wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+					wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -17787,8 +18307,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -17854,87 +18374,72 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 							workers[1] = 0;
 
 							for (i = 0; i < PSIZE; i++) {
-								baseUndiscriminated[i] = 0;
-								baseDiscriminated[i] = 0;
+								baseAccepted[i] = 0;
+								baseCitizen[i] = 0;
+								basePrejudice[i] = 0;
+								baseErasure[i] = 0;
+								baseHostile[i] = 0;
+								accepted[i][1] = 0;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 
-								if (level[0] > 0) {
-									for (int j = 0; j < building[bIt].getSize(); j++)
-										baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-									if (baseUndiscriminated[i] < 0)
-										baseUndiscriminated[i] = 0;
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+									accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 								}
-								undiscriminated[i][1] = baseUndiscriminated[i];
-								discriminated[i][1] = 0;
+								if (baseAccepted[i] < 0)
+									baseAccepted[i] = 0;
+								if (accepted[i][1] < 0)
+									accepted[i][1] = 0;
+								workers[1] += accepted[i][1];
 							}
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
-
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][1] + discriminated[i][1];
-
-								if (discrimination) {
-									discriminated[i][1] += profession;
-
-									if (discriminated[i][1] < 0) {
-										undiscriminated[i][1] -= discriminated[i][1];
-										discriminated[i][1] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][1] += profession;
-								}
-								if (undiscriminated[i][1] < 0)
-									undiscriminated[i][1] = 0;
-								workers[1] += undiscriminated[i][1] + discriminated[i][1];
-							}
-							wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 						}
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							undiscriminated[i][0] = baseUndiscriminated[i];
-							discriminated[i][0] = baseDiscriminated[i];
-						}
-						if (level[0] != level[1]) {
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
 
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][0] + discriminated[i][0];
-
-								if (discrimination) {
-									discriminated[i][0] += profession;
-
-									if (discriminated[i][0] < 0) {
-										undiscriminated[i][0] -= discriminated[i][0];
-										discriminated[i][0] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][0] += profession;
-								}
-								if (undiscriminated[i][0] < 0)
-									undiscriminated[i][0] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][0] = profession;
+								citizen[i][0] = 0;
+								prejudice[i][0] = 0;
+								erasure[i][0] = 0;
+								hostile[i][0] = 0;
 							}
+							else {
+								accepted[i][0] = float(profession) / employees * baseAccepted[i];
+								citizen[i][0] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+								erasure[i][0] = float(profession) / employees * baseErasure[i];
+								hostile[i][0] = float(profession) / employees * baseHostile[i];
+							}
+							workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 						}
-						for (i = 0; i < PSIZE; i++)
-							workers[0] += undiscriminated[i][0] + discriminated[i][0];
-						wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
-						throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+						wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 						if (throughput[1] > eosCap)
 							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
 						for (i = 0; i < GSIZE; i++) {
 							good[i].setInput(1);
 							good[i].setOutput(1);
 
 							for (int j = 0; j < building[bIt].getSize(); j++) {
-								good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-								good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 							}
 							good[i].setInputOutput(1);
 						}
@@ -17943,6 +18448,11 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 
 					if (throughput[0] > eosCap)
 						throughput[0] = eosCap;
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
 					for (i = 0; i < 2; i++) {
 						cost[i] = 0;
 						income[i] = 0;
@@ -17989,6 +18499,534 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(5) != 0) {
+				if (choice == 4) {
+					system("cls");
+					cout << "Enter Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0])
+							iIn = level[0];
+						level[3] = iIn;
+
+						if (level[0] != 0) {
+							throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
+
+							if (throughput[0] > eosCap)
+								throughput[0] = eosCap;
+							throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+
+							for (i = 0; i < 2; i++) {
+								cost[i] = 0;
+								income[i] = 0;
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(0);
+								good[i].setOutput(0);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
+									good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
+								}
+								good[i].setInputOutput(0);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[0] += good[i].getInput(0) * good[i].getMarketPrice();
+									income[0] += good[i].getOutput(0) * good[i].getMarketPrice();
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[0] += good[i].getInput(0) * good[i].getLocalPrice(mapi);
+									income[0] += good[i].getOutput(0) * good[i].getLocalPrice(mapi);
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							for (i = 0; i < 2; i++) {
+								profit[i][0] = income[i] - cost[i];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[i][1] = income[i] - cost[i] * 0.9;
+									profit[i][2] = income[i] - cost[i] * 0.75;
+									profit[i][3] = income[i] - cost[i] * 0.65;
+									profit[i][4] = income[i] - cost[i] * 0.5;
+									profit[i][5] = income[i] - cost[i] * 0.25;
+								}
+							}
+						}
+					}
+				}
+				else if (choice == 5) {
+					system("cls");
+					cout << "Enter New Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[4] = iIn;
+						workers[1] = 0;
+
+						if (iIn < level[5])
+							level[5] = iIn;
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (choice == 6) {
+					system("cls");
+					cout << "Enter New Nationalized Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[5] = iIn;
+
+						if (iIn > level[4]) {
+							level[4] = iIn;
+							workers[1] = 0;
+
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						}
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (building[bIt].getThroughput(6) != 0) {
+					if (choice == 7) {
+						system("cls");
+						cout << "Enter New Company Owned Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 0) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							if (iIn > level[0] + level[4] - level[1])
+								iIn = level[0] + level[4] - level[1];
+							level[6] = iIn;
+
+							if (level[0] + level[4] != level[1]) {
+								throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+								if (throughput[1] > eosCap)
+									throughput[1] = eosCap;
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+								cost[1] = 0;
+								income[1] = 0;
+
+								for (i = 0; i < GSIZE; i++) {
+									good[i].setInput(1);
+									good[i].setOutput(1);
+
+									for (int j = 0; j < building[bIt].getSize(); j++) {
+										good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+										good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+									}
+									good[i].setInputOutput(1);
+									input[i] = good[i].getInput(1) - good[i].getInput(0);
+									output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+								}
+								for (i = 0; i < GSIZE; i++) {
+									purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+									localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+									if (good[i].localGood()) {
+										cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+										income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									}
+									else {
+										cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+										income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									}
+								}
+								profit[1][0] = income[1] - cost[1];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[1][1] = income[1] - cost[1] * 0.9;
+									profit[1][2] = income[1] - cost[1] * 0.75;
+									profit[1][3] = income[1] - cost[1] * 0.65;
+									profit[1][4] = income[1] - cost[1] * 0.5;
+									profit[1][5] = income[1] - cost[1] * 0.25;
+								}
+							}
+						}
+					}
+					else {
+						system("cls");
+						cout << "Enter " << method.getProductionMethod(pm[choice - 8] + building[bIt].getProductionMethod()) << " Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 1 || iIn > method.getSize(pm[choice - 8] + building[bIt].getProductionMethod())) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							methodLevel[pm[choice - 8]] = iIn - 1;
+							workers[1] = 0;
+
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+							cost[1] = 0;
+							income[1] = 0;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							if (level[0] + level[4] != level[1])
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							else {
+								throughput[1] += building[bIt].getThroughput(6);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else if (choice == 4) {
 				system("cls");
 				cout << "Enter New Level: ";
@@ -18007,51 +19045,56 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					system("pause");
 				}
 				else {
-					level[3] = iIn;
+					level[4] = iIn;
 					workers[1] = 0;
 
-					if (iIn < level[4])
-						level[4] = iIn;
+					if (iIn < level[5])
+						level[5] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18099,53 +19142,56 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					system("pause");
 				}
 				else {
-					level[4] = iIn;
+					level[5] = iIn;
 
-					if (iIn > level[3]) {
-						level[3] = iIn;
+					if (iIn > level[4]) {
+						level[4] = iIn;
 						workers[1] = 0;
 
 						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 							int profession = 0;
 
 							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							if (profession < 0)
 								profession = 0;
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = baseDiscriminated[i];
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 							}
 							else {
-								undiscriminated[i][1] += profession;
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
 							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18175,6 +19221,169 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(6) != 0) {
+				if (choice == 6) {
+					system("cls");
+					cout << "Enter New Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0] + level[4] - level[1])
+							iIn = level[0] + level[4] - level[1];
+						level[6] = iIn;
+
+						if (level[0] + level[4] != level[1]) {
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							cost[1] = 0;
+							income[1] = 0;
+
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeight(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeight(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePrediction(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else {
 				system("cls");
 				cout << "Enter " << method.getProductionMethod(pm[choice - 6] + building[bIt].getProductionMethod()) << " Level: ";
@@ -18197,45 +19406,48 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18291,75 +19503,37 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -18375,8 +19549,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -18440,76 +19614,54 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
+						accepted[i][1] = 0;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = 0;
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						if (accepted[i][1] < 0)
+							accepted[i][1] = 0;
+						workers[1] += accepted[i][1];
 					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
-					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				}
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -18517,7 +19669,7 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				}
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -18531,8 +19683,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -18602,41 +19754,39 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				system("pause");
 			}
 			else {
-				level[3] = iIn;
+				level[4] = iIn;
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -18645,8 +19795,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18659,8 +19809,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18702,37 +19852,35 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+					profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
 			if (building[bIt].hasEOS()) {
-				throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+				throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 				if (throughput[1] > eosCap)
 					throughput[1] = eosCap;
@@ -18741,8 +19889,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18755,8 +19903,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18808,37 +19956,35 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -18847,8 +19993,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18861,8 +20007,8 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -18896,31 +20042,36 @@ void state(goodsType good[GSIZE], productionMethodsType& method, buildingsType b
 	} while (!exit);
 }
 
-void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
-	int level[5] = { location[lIt].getLevel(), 0, 0, 1, 0 };
+	int level[7] = { location[lIt].getLevel(), 0, 0, 0, 1, 0, 0 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	float throughput[2];
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float cost[2] = { 0 };
@@ -18995,8 +20146,11 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 		cout << building[bIt].getBuilding() << endl
 			 << "State Level: " << level[0] << endl
 			 << "Level: " << level[1] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << "Nationalized Level: " << level[2] << endl;
+			if (building[bIt].getThroughput(5) != 0)
+				cout << "Company Owned Level: " << level[3] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -19015,9 +20169,12 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			}
 		}
 		cout << endl
-			 << "Level: " << level[3] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
-			cout << "Nationalized Level: " << level[4] << endl;
+			 << "Level: " << level[4] << endl;
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
+			cout << "Nationalized Level: " << level[5] << endl;
+			if (building[bIt].getThroughput(6) != 0)
+				cout << "Company Owned Level: " << level[6] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -19035,19 +20192,13 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
-		if (building[bIt].getInfrastructureUsage(level[3] - level[1]) > 0)
-			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
-		else if (building[bIt].getInfrastructureUsage(level[3] - level[1]) < 0)
-			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
+		cout << endl;
+		if (building[bIt].getInfrastructureUsage(level[4] - level[1]) > 0)
+			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
+		else if (building[bIt].getInfrastructureUsage(level[4] - level[1]) < 0)
+			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -19109,7 +20260,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				}
 			}
 		}
-		if (level[3] > 0) {
+		if (level[4] > 0) {
 			if (wage[1] != 0) {
 				cout << "Profit: $" << trunc2D(profit[1][0] - wage[1]) << endl;
 				if (building[bIt].getBuilding() == "Construction Sector") {
@@ -19145,7 +20296,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << "Productivity: $" << trunc2D(52 * profit[1][0] / workers[1]) << endl;
 				if (building[bIt].buildable()) {
 					cout << "Productivity/Construction: $" << trunc2D(26000 * profit[1][0] / workers[1] / building[bIt].getConstructionCost()) << endl
-						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[3] / building[bIt].getConstructionCost()) << endl;
+						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[4] / building[bIt].getConstructionCost()) << endl;
 				}
 			}
 		}
@@ -19187,11 +20338,17 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 		cout << endl
 			 << "1. Set State Level\n"
 			 << "2. Set Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set Nationalized Level\n";
+			if (building[bIt].getThroughput(5) != 0)
+				cout << i++ << ". Set Company Owned Level\n";
+		}
 		cout << i++ << ". Set New Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set New Nationalized Level\n";
+			if (building[bIt].getThroughput(6) != 0)
+				cout << i++ << ". Set New Company Owned Level\n";
+		}
 		for (int j = 0; j < building[bIt].getSize(); j++) {
 			if (method.getSize(j + building[bIt].getProductionMethod()) > 1) {
 				pm[it++] = j;
@@ -19201,8 +20358,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -19224,159 +20380,46 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			exit = true;
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitabilityImportsCanceled(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[3], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitabilityImportsCanceled(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[4], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			if (choice == 1) {
@@ -19405,82 +20448,58 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						if (iIn < level[2])
 							level[2] = iIn;
 					}
+					if (iIn < level[3])
+						level[3] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < 2; i++)
 						workers[i] = 0;
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
-						}
 						for (int j = 0; j < 2; j++) {
-							undiscriminated[i][j] = baseUndiscriminated[i];
-							discriminated[i][j] = 0;
+							accepted[i][j] = 0;
+							citizen[i][j] = 0;
+							prejudice[i][j] = 0;
+							erasure[i][j] = 0;
+							hostile[i][j] = 0;
 						}
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						for (int j = 0; j < 2; j++) {
+							if (accepted[i][j] < 0)
+								accepted[i][j] = 0;
+							workers[j] += accepted[i][j];
 						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						for (int j = 0; j < 2; j++)
-							workers[j] += undiscriminated[i][j] + discriminated[i][j];
 					}
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
-						wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+						wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -19490,8 +20509,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -19548,88 +20567,80 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					if (iIn > level[0]) {
 						level[0] = iIn;
 						workers[1] = 0;
-						
+
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							baseUndiscriminated[i] = 0;
-							baseDiscriminated[i] = 0;
+							baseAccepted[i] = 0;
+							baseCitizen[i] = 0;
+							basePrejudice[i] = 0;
+							baseErasure[i] = 0;
+							baseHostile[i] = 0;
+							accepted[i][1] = 0;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 
-							if (level[0] > 0) {
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (baseUndiscriminated[i] < 0)
-									baseUndiscriminated[i] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+								accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							}
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = 0;
+							if (baseAccepted[i] < 0)
+								baseAccepted[i] = 0;
+							if (accepted[i][1] < 0)
+								accepted[i][1] = 0;
+							workers[1] += accepted[i][1];
 						}
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][1] += profession;
-							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
-						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
 					else if (iIn < level[2])
 						level[2] = iIn;
+					else if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
-						undiscriminated[i][0] = baseUndiscriminated[i];
-						discriminated[i][0] = baseDiscriminated[i];
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+						int profession = 0;
 
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++)
+							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						if (profession < 0)
+							profession = 0;
+						if (employees == 0) {
+							accepted[i][0] = profession;
+							citizen[i][0] = 0;
+							prejudice[i][0] = 0;
+							erasure[i][0] = 0;
+							hostile[i][0] = 0;
 						}
+						else {
+							accepted[i][0] = float(profession) / employees * baseAccepted[i];
+							citizen[i][0] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+							erasure[i][0] = float(profession) / employees * baseErasure[i];
+							hostile[i][0] = float(profession) / employees * baseHostile[i];
+						}
+						workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 					}
-					for (i = 0; i < PSIZE; i++)
-						workers[0] += undiscriminated[i][0] + discriminated[i][0];
-					wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+					wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -19639,8 +20650,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -19702,87 +20713,72 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 							workers[1] = 0;
 
 							for (i = 0; i < PSIZE; i++) {
-								baseUndiscriminated[i] = 0;
-								baseDiscriminated[i] = 0;
+								baseAccepted[i] = 0;
+								baseCitizen[i] = 0;
+								basePrejudice[i] = 0;
+								baseErasure[i] = 0;
+								baseHostile[i] = 0;
+								accepted[i][1] = 0;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 
-								if (level[0] > 0) {
-									for (int j = 0; j < building[bIt].getSize(); j++)
-										baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-									if (baseUndiscriminated[i] < 0)
-										baseUndiscriminated[i] = 0;
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+									accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 								}
-								undiscriminated[i][1] = baseUndiscriminated[i];
-								discriminated[i][1] = 0;
+								if (baseAccepted[i] < 0)
+									baseAccepted[i] = 0;
+								if (accepted[i][1] < 0)
+									accepted[i][1] = 0;
+								workers[1] += accepted[i][1];
 							}
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
-
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][1] + discriminated[i][1];
-
-								if (discrimination) {
-									discriminated[i][1] += profession;
-
-									if (discriminated[i][1] < 0) {
-										undiscriminated[i][1] -= discriminated[i][1];
-										discriminated[i][1] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][1] += profession;
-								}
-								if (undiscriminated[i][1] < 0)
-									undiscriminated[i][1] = 0;
-								workers[1] += undiscriminated[i][1] + discriminated[i][1];
-							}
-							wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 						}
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							undiscriminated[i][0] = baseUndiscriminated[i];
-							discriminated[i][0] = baseDiscriminated[i];
-						}
-						if (level[0] != level[1]) {
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
 
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][0] + discriminated[i][0];
-
-								if (discrimination) {
-									discriminated[i][0] += profession;
-
-									if (discriminated[i][0] < 0) {
-										undiscriminated[i][0] -= discriminated[i][0];
-										discriminated[i][0] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][0] += profession;
-								}
-								if (undiscriminated[i][0] < 0)
-									undiscriminated[i][0] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][0] = profession;
+								citizen[i][0] = 0;
+								prejudice[i][0] = 0;
+								erasure[i][0] = 0;
+								hostile[i][0] = 0;
 							}
+							else {
+								accepted[i][0] = float(profession) / employees * baseAccepted[i];
+								citizen[i][0] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+								erasure[i][0] = float(profession) / employees * baseErasure[i];
+								hostile[i][0] = float(profession) / employees * baseHostile[i];
+							}
+							workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 						}
-						for (i = 0; i < PSIZE; i++)
-							workers[0] += undiscriminated[i][0] + discriminated[i][0];
-						wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
-						throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+						wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 						if (throughput[1] > eosCap)
 							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
 						for (i = 0; i < GSIZE; i++) {
 							good[i].setInput(1);
 							good[i].setOutput(1);
 
 							for (int j = 0; j < building[bIt].getSize(); j++) {
-								good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-								good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 							}
 							good[i].setInputOutput(1);
 						}
@@ -19791,6 +20787,11 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 
 					if (throughput[0] > eosCap)
 						throughput[0] = eosCap;
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
 					for (i = 0; i < 2; i++) {
 						cost[i] = 0;
 						income[i] = 0;
@@ -19833,6 +20834,510 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(5) != 0) {
+				if (choice == 4) {
+					system("cls");
+					cout << "Enter Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0])
+							iIn = level[0];
+						level[3] = iIn;
+
+						if (level[0] != 0) {
+							throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
+
+							if (throughput[0] > eosCap)
+								throughput[0] = eosCap;
+							throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+
+							for (i = 0; i < 2; i++) {
+								cost[i] = 0;
+								income[i] = 0;
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(0);
+								good[i].setOutput(0);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
+									good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
+								}
+								good[i].setInputOutput(0);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[0] += good[i].getInput(0) * good[i].getMarketPrice();
+									income[0] += good[i].getOutput(0) * good[i].getMarketPrice();
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[0] += good[i].getInput(0) * good[i].getLocalPrice(mapi);
+									income[0] += good[i].getOutput(0) * good[i].getLocalPrice(mapi);
+									cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								}
+							}
+							for (i = 0; i < 2; i++) {
+								profit[i][0] = income[i] - cost[i];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[i][1] = income[i] - cost[i] * 0.9;
+									profit[i][2] = income[i] - cost[i] * 0.75;
+									profit[i][3] = income[i] - cost[i] * 0.65;
+									profit[i][4] = income[i] - cost[i] * 0.5;
+									profit[i][5] = income[i] - cost[i] * 0.25;
+								}
+							}
+						}
+					}
+				}
+				else if (choice == 5) {
+					system("cls");
+					cout << "Enter New Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[4] = iIn;
+						workers[1] = 0;
+
+						if (iIn < level[5])
+							level[5] = iIn;
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (choice == 6) {
+					system("cls");
+					cout << "Enter New Nationalized Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[5] = iIn;
+
+						if (iIn > level[4]) {
+							level[4] = iIn;
+							workers[1] = 0;
+							
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						}
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (building[bIt].getThroughput(6) != 0) {
+					if (choice == 7) {
+						system("cls");
+						cout << "Enter New Company Owned Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 0) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							if (iIn > level[0] + level[4] - level[1])
+								iIn = level[0] + level[4] - level[1];
+							level[6] = iIn;
+
+							if (level[0] + level[4] != level[1]) {
+								throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+								if (throughput[1] > eosCap)
+									throughput[1] = eosCap;
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+								cost[1] = 0;
+								income[1] = 0;
+
+								for (i = 0; i < GSIZE; i++) {
+									good[i].setInput(1);
+									good[i].setOutput(1);
+
+									for (int j = 0; j < building[bIt].getSize(); j++) {
+										good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+										good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+									}
+									good[i].setInputOutput(1);
+									input[i] = good[i].getInput(1) - good[i].getInput(0);
+									output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+									if (good[i].localGood()) {
+										cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+										income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+									}
+									else {
+										cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+										income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+									}
+								}
+								profit[1][0] = income[1] - cost[1];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[1][1] = income[1] - cost[1] * 0.9;
+									profit[1][2] = income[1] - cost[1] * 0.75;
+									profit[1][3] = income[1] - cost[1] * 0.65;
+									profit[1][4] = income[1] - cost[1] * 0.5;
+									profit[1][5] = income[1] - cost[1] * 0.25;
+								}
+							}
+						}
+					}
+					else {
+						system("cls");
+						cout << "Enter " << method.getProductionMethod(pm[choice - 8] + building[bIt].getProductionMethod()) << " Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 1 || iIn > method.getSize(pm[choice - 8] + building[bIt].getProductionMethod())) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							methodLevel[pm[choice - 8]] = iIn - 1;
+							workers[1] = 0;
+
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+							cost[1] = 0;
+							income[1] = 0;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							if (level[0] + level[4] != level[1])
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							else {
+								throughput[1] += building[bIt].getThroughput(6);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else if (choice == 4) {
 				system("cls");
 				cout << "Enter New Level: ";
@@ -19851,51 +21356,56 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					system("pause");
 				}
 				else {
-					level[3] = iIn;
+					level[4] = iIn;
 					workers[1] = 0;
 
-					if (iIn < level[4])
-						level[4] = iIn;
+					if (iIn < level[5])
+						level[5] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -19939,53 +21449,56 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					system("pause");
 				}
 				else {
-					level[4] = iIn;
+					level[5] = iIn;
 
-					if (iIn > level[3]) {
-						level[3] = iIn;
+					if (iIn > level[4]) {
+						level[4] = iIn;
 						workers[1] = 0;
-
+						
 						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 							int profession = 0;
 
 							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							if (profession < 0)
 								profession = 0;
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = baseDiscriminated[i];
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 							}
 							else {
-								undiscriminated[i][1] += profession;
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
 							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20011,6 +21524,161 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(6) != 0) {
+				if (choice == 6) {
+					system("cls");
+					cout << "Enter New Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0] + level[4] - level[1])
+							iIn = level[0] + level[4] - level[1];
+						level[6] = iIn;
+
+						if (level[0] + level[4] != level[1]) {
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							cost[1] = 0;
+							income[1] = 0;
+
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPrice(input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPrice(input[i], output[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPriceImportsCanceled(mapi, input[i], output[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else {
 				system("cls");
 				cout << "Enter " << method.getProductionMethod(pm[choice - 6] + building[bIt].getProductionMethod()) << " Level: ";
@@ -20033,45 +21701,48 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20123,75 +21794,37 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -20207,8 +21840,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -20266,78 +21899,56 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				if (iIn > level[0]) {
 					level[0] = iIn;
 					workers[1] = 0;
-
+					
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
+						accepted[i][1] = 0;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = 0;
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						if (accepted[i][1] < 0)
+							accepted[i][1] = 0;
+						workers[1] += accepted[i][1];
 					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
-					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				}
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -20345,7 +21956,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				}
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -20359,8 +21970,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -20439,41 +22050,39 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				system("pause");
 			}
 			else {
-				level[3] = iIn;
+				level[4] = iIn;
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -20482,8 +22091,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20505,8 +22114,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20544,37 +22153,35 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+					profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
 			if (building[bIt].hasEOS()) {
-				throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+				throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 				if (throughput[1] > eosCap)
 					throughput[1] = eosCap;
@@ -20583,8 +22190,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20606,8 +22213,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20655,37 +22262,35 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -20694,8 +22299,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20717,8 +22322,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -20748,31 +22353,36 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 	} while (!exit);
 }
 
-void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
-	int level[5] = { location[lIt].getLevel(), 0, 0, 1, 0 };
+	int level[7] = { location[lIt].getLevel(), 0, 0, 0, 1, 0, 0 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	float throughput[2];
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float purchaseWeight[GSIZE];
@@ -20845,8 +22455,11 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 		cout << building[bIt].getBuilding() << endl
 			 << "State Level: " << level[0] << endl
 			 << "Level: " << level[1] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << "Nationalized Level: " << level[2] << endl;
+			if (building[bIt].getThroughput(5) != 0)
+				cout << "Company Owned Level: " << level[3] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -20865,9 +22478,12 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			}
 		}
 		cout << endl
-			 << "Level: " << level[3] << endl;
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
-			cout << "Nationalized Level: " << level[4] << endl;
+			 << "Level: " << level[4] << endl;
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
+			cout << "Nationalized Level: " << level[5] << endl;
+			if (building[bIt].getThroughput(6) != 0)
+				cout << "Company Owned Level: " << level[6] << endl;
+		}
 		for (int i = 0; i < building[bIt].getSize(); i++) {
 			if (method.getSize(i + building[bIt].getProductionMethod()) > 1) {
 				cout << method.getProductionMethod(i + building[bIt].getProductionMethod());
@@ -20885,19 +22501,13 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
-		if (building[bIt].getInfrastructureUsage(level[3] - level[1]) > 0)
-			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
-		else if (building[bIt].getInfrastructureUsage(level[3] - level[1]) < 0)
-			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[3] - level[1]) << endl;
+		cout << endl;
+		if (building[bIt].getInfrastructureUsage(level[4] - level[1]) > 0)
+			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
+		else if (building[bIt].getInfrastructureUsage(level[4] - level[1]) < 0)
+			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[4] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -20959,7 +22569,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				}
 			}
 		}
-		if (level[3] > 0) {
+		if (level[4] > 0) {
 			if (wage[1] != 0) {
 				cout << "Profit: $" << trunc2D(profit[1][0] - wage[1]) << endl;
 				if (building[bIt].getBuilding() == "Construction Sector") {
@@ -20995,7 +22605,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << "Productivity: $" << trunc2D(52 * profit[1][0] / workers[1]) << endl;
 				if (building[bIt].buildable()) {
 					cout << "Productivity/Construction: $" << trunc2D(26000 * profit[1][0] / workers[1] / building[bIt].getConstructionCost()) << endl
-						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[3] / building[bIt].getConstructionCost()) << endl;
+						 << "Profitability: $" << trunc2D(20 * profit[1][0] / level[4] / building[bIt].getConstructionCost()) << endl;
 				}
 			}
 		}
@@ -21037,11 +22647,17 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 		cout << endl
 			 << "1. Set State Level\n"
 			 << "2. Set Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set Nationalized Level\n";
+			if (building[bIt].getThroughput(5) != 0)
+				cout << i++ << ". Set Company Owned Level\n";
+		}
 		cout << i++ << ". Set New Level\n";
-		if (building[bIt].buildable() && !building[bIt].autoSubsidized())
+		if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			cout << i++ << ". Set New Nationalized Level\n";
+			if (building[bIt].getThroughput(6) != 0)
+				cout << i++ << ". Set New Company Owned Level\n";
+		}
 		for (int j = 0; j < building[bIt].getSize(); j++) {
 			if (method.getSize(j + building[bIt].getProductionMethod()) > 1) {
 				pm[it++] = j;
@@ -21051,8 +22667,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -21074,159 +22689,46 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			exit = true;
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitabilityImportsCanceled(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[3], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitabilityImportsCanceled(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[4], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (building[bIt].buildable() && !building[bIt].autoSubsidized()) {
 			if (choice == 1) {
@@ -21255,82 +22757,58 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						if (iIn < level[2])
 							level[2] = iIn;
 					}
+					if (iIn < level[3])
+						level[3] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < 2; i++)
 						workers[i] = 0;
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
-						}
 						for (int j = 0; j < 2; j++) {
-							undiscriminated[i][j] = baseUndiscriminated[i];
-							discriminated[i][j] = 0;
+							accepted[i][j] = 0;
+							citizen[i][j] = 0;
+							prejudice[i][j] = 0;
+							erasure[i][j] = 0;
+							hostile[i][j] = 0;
 						}
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						for (int j = 0; j < 2; j++) {
+							if (accepted[i][j] < 0)
+								accepted[i][j] = 0;
+							workers[j] += accepted[i][j];
 						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						for (int j = 0; j < 2; j++)
-							workers[j] += undiscriminated[i][j] + discriminated[i][j];
 					}
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
-						wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+						wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -21340,8 +22818,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -21403,87 +22881,79 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						level[0] = iIn;
 						workers[1] = 0;
 
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							baseUndiscriminated[i] = 0;
-							baseDiscriminated[i] = 0;
+							baseAccepted[i] = 0;
+							baseCitizen[i] = 0;
+							basePrejudice[i] = 0;
+							baseErasure[i] = 0;
+							baseHostile[i] = 0;
+							accepted[i][1] = 0;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 
-							if (level[0] > 0) {
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (baseUndiscriminated[i] < 0)
-									baseUndiscriminated[i] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+								accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							}
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = 0;
+							if (baseAccepted[i] < 0)
+								baseAccepted[i] = 0;
+							if (accepted[i][1] < 0)
+								accepted[i][1] = 0;
+							workers[1] += accepted[i][1];
 						}
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
-
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][1] += profession;
-							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
-						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
 					else if (iIn < level[2])
 						level[2] = iIn;
+					else if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
-						undiscriminated[i][0] = baseUndiscriminated[i];
-						discriminated[i][0] = baseDiscriminated[i];
-					}
-					if (level[0] != level[1]) {
-						for (i = 0; i < PSIZE; i++) {
-							int profession = 0;
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+						int profession = 0;
 
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (profession < 0)
-								profession = 0;
-							profession -= undiscriminated[i][0] + discriminated[i][0];
-
-							if (discrimination) {
-								discriminated[i][0] += profession;
-
-								if (discriminated[i][0] < 0) {
-									undiscriminated[i][0] -= discriminated[i][0];
-									discriminated[i][0] = 0;
-								}
-							}
-							else {
-								undiscriminated[i][0] += profession;
-							}
-							if (undiscriminated[i][0] < 0)
-								undiscriminated[i][0] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++)
+							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						if (profession < 0)
+							profession = 0;
+						if (employees == 0) {
+							accepted[i][0] = profession;
+							citizen[i][0] = 0;
+							prejudice[i][0] = 0;
+							erasure[i][0] = 0;
+							hostile[i][0] = 0;
 						}
+						else {
+							accepted[i][0] = float(profession) / employees * baseAccepted[i];
+							citizen[i][0] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+							erasure[i][0] = float(profession) / employees * baseErasure[i];
+							hostile[i][0] = float(profession) / employees * baseHostile[i];
+						}
+						workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 					}
-					for (i = 0; i < PSIZE; i++)
-						workers[0] += undiscriminated[i][0] + discriminated[i][0];
-					wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+					wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 					throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
 							throughput[i] = eosCap;
 						cost[i] = 0;
 						income[i] = 0;
+					}
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
 					}
 					for (i = 0; i < GSIZE; i++) {
 						for (int j = 0; j < 2; j++) {
@@ -21493,8 +22963,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -21560,87 +23030,72 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 							workers[1] = 0;
 
 							for (i = 0; i < PSIZE; i++) {
-								baseUndiscriminated[i] = 0;
-								baseDiscriminated[i] = 0;
+								baseAccepted[i] = 0;
+								baseCitizen[i] = 0;
+								basePrejudice[i] = 0;
+								baseErasure[i] = 0;
+								baseHostile[i] = 0;
+								accepted[i][1] = 0;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 
-								if (level[0] > 0) {
-									for (int j = 0; j < building[bIt].getSize(); j++)
-										baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-									if (baseUndiscriminated[i] < 0)
-										baseUndiscriminated[i] = 0;
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+									accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 								}
-								undiscriminated[i][1] = baseUndiscriminated[i];
-								discriminated[i][1] = 0;
+								if (baseAccepted[i] < 0)
+									baseAccepted[i] = 0;
+								if (accepted[i][1] < 0)
+									accepted[i][1] = 0;
+								workers[1] += accepted[i][1];
 							}
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
-
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][1] + discriminated[i][1];
-
-								if (discrimination) {
-									discriminated[i][1] += profession;
-
-									if (discriminated[i][1] < 0) {
-										undiscriminated[i][1] -= discriminated[i][1];
-										discriminated[i][1] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][1] += profession;
-								}
-								if (undiscriminated[i][1] < 0)
-									undiscriminated[i][1] = 0;
-								workers[1] += undiscriminated[i][1] + discriminated[i][1];
-							}
-							wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 						}
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
 						for (i = 0; i < PSIZE; i++) {
-							undiscriminated[i][0] = baseUndiscriminated[i];
-							discriminated[i][0] = baseDiscriminated[i];
-						}
-						if (level[0] != level[1]) {
-							for (i = 0; i < PSIZE; i++) {
-								int profession = 0;
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
 
-								for (int j = 0; j < building[bIt].getSize(); j++)
-									profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-								if (profession < 0)
-									profession = 0;
-								profession -= undiscriminated[i][0] + discriminated[i][0];
-
-								if (discrimination) {
-									discriminated[i][0] += profession;
-
-									if (discriminated[i][0] < 0) {
-										undiscriminated[i][0] -= discriminated[i][0];
-										discriminated[i][0] = 0;
-									}
-								}
-								else {
-									undiscriminated[i][0] += profession;
-								}
-								if (undiscriminated[i][0] < 0)
-									undiscriminated[i][0] = 0;
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][0] = profession;
+								citizen[i][0] = 0;
+								prejudice[i][0] = 0;
+								erasure[i][0] = 0;
+								hostile[i][0] = 0;
 							}
+							else {
+								accepted[i][0] = float(profession) / employees * baseAccepted[i];
+								citizen[i][0] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+								erasure[i][0] = float(profession) / employees * baseErasure[i];
+								hostile[i][0] = float(profession) / employees * baseHostile[i];
+							}
+							workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 						}
-						for (i = 0; i < PSIZE; i++)
-							workers[0] += undiscriminated[i][0] + discriminated[i][0];
-						wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
-						throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+						wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 
 						if (throughput[1] > eosCap)
 							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
 						for (i = 0; i < GSIZE; i++) {
 							good[i].setInput(1);
 							good[i].setOutput(1);
 
 							for (int j = 0; j < building[bIt].getSize(); j++) {
-								good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-								good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 							}
 							good[i].setInputOutput(1);
 						}
@@ -21649,6 +23104,11 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 
 					if (throughput[0] > eosCap)
 						throughput[0] = eosCap;
+					if (level[0] != 0)
+						throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+					else {
+						throughput[0] += building[bIt].getThroughput(5);
+					}
 					for (i = 0; i < 2; i++) {
 						cost[i] = 0;
 						income[i] = 0;
@@ -21695,6 +23155,534 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(5) != 0) {
+				if (choice == 4) {
+					system("cls");
+					cout << "Enter Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0])
+							iIn = level[0];
+						level[3] = iIn;
+
+						if (level[0] != 0) {
+							throughput[0] = (float(level[0]) * 2 - float(level[2])) / 200 + 1;
+
+							if (throughput[0] > eosCap)
+								throughput[0] = eosCap;
+							throughput[0] += building[bIt].getThroughput(5) * float(level[3]) / float(level[0]);
+
+							for (i = 0; i < 2; i++) {
+								cost[i] = 0;
+								income[i] = 0;
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(0);
+								good[i].setOutput(0);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
+									good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
+								}
+								good[i].setInputOutput(0);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[0] += good[i].getInput(0) * good[i].getMarketPrice();
+									income[0] += good[i].getOutput(0) * good[i].getMarketPrice();
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[0] += good[i].getInput(0) * good[i].getLocalPrice(mapi);
+									income[0] += good[i].getOutput(0) * good[i].getLocalPrice(mapi);
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							for (i = 0; i < 2; i++) {
+								profit[i][0] = income[i] - cost[i];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[i][1] = income[i] - cost[i] * 0.9;
+									profit[i][2] = income[i] - cost[i] * 0.75;
+									profit[i][3] = income[i] - cost[i] * 0.65;
+									profit[i][4] = income[i] - cost[i] * 0.5;
+									profit[i][5] = income[i] - cost[i] * 0.25;
+								}
+							}
+						}
+					}
+				}
+				else if (choice == 5) {
+					system("cls");
+					cout << "Enter New Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[4] = iIn;
+						workers[1] = 0;
+
+						if (iIn < level[5])
+							level[5] = iIn;
+						if (level[0] + level[4] - level[1] < level[6])
+							level[6] = level[0] + level[4] - level[1];
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (choice == 6) {
+					system("cls");
+					cout << "Enter New Nationalized Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						level[5] = iIn;
+
+						if (iIn > level[4]) {
+							level[4] = iIn;
+							workers[1] = 0;
+							
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						}
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+				else if (building[bIt].getThroughput(6) != 0) {
+					if (choice == 7) {
+						system("cls");
+						cout << "Enter New Company Owned Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 0) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							if (iIn > level[0] + level[4] - level[1])
+								iIn = level[0] + level[4] - level[1];
+							level[6] = iIn;
+
+							if (level[0] + level[4] != level[1]) {
+								throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+								if (throughput[1] > eosCap)
+									throughput[1] = eosCap;
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+								cost[1] = 0;
+								income[1] = 0;
+
+								for (i = 0; i < GSIZE; i++) {
+									good[i].setInput(1);
+									good[i].setOutput(1);
+
+									for (int j = 0; j < building[bIt].getSize(); j++) {
+										good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+										good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+									}
+									good[i].setInputOutput(1);
+									input[i] = good[i].getInput(1) - good[i].getInput(0);
+									output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+								}
+								for (i = 0; i < GSIZE; i++) {
+									purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+									localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+									if (good[i].localGood()) {
+										cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+										income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									}
+									else {
+										cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+										income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									}
+								}
+								profit[1][0] = income[1] - cost[1];
+
+								if (building[bIt].getBuilding() == "Construction Sector") {
+									profit[1][1] = income[1] - cost[1] * 0.9;
+									profit[1][2] = income[1] - cost[1] * 0.75;
+									profit[1][3] = income[1] - cost[1] * 0.65;
+									profit[1][4] = income[1] - cost[1] * 0.5;
+									profit[1][5] = income[1] - cost[1] * 0.25;
+								}
+							}
+						}
+					}
+					else {
+						system("cls");
+						cout << "Enter " << method.getProductionMethod(pm[choice - 8] + building[bIt].getProductionMethod()) << " Level: ";
+						cin >> iIn;
+
+						if (!cin) {
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else if (iIn < 1 || iIn > method.getSize(pm[choice - 8] + building[bIt].getProductionMethod())) {
+							system("cls");
+							cout << "Error invalid input\n\n";
+							system("pause");
+						}
+						else {
+							methodLevel[pm[choice - 8]] = iIn - 1;
+							workers[1] = 0;
+
+							for (i = 0; i < PSIZE; i++) {
+								int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+								int profession = 0;
+
+								for (int j = 0; j < building[bIt].getSize(); j++)
+									profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								if (profession < 0)
+									profession = 0;
+								if (employees == 0) {
+									accepted[i][1] = profession;
+									citizen[i][1] = 0;
+									prejudice[i][1] = 0;
+									erasure[i][1] = 0;
+									hostile[i][1] = 0;
+								}
+								else {
+									accepted[i][1] = float(profession) / employees * baseAccepted[i];
+									citizen[i][1] = float(profession) / employees * baseCitizen[i];
+									prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+									erasure[i][1] = float(profession) / employees * baseErasure[i];
+									hostile[i][1] = float(profession) / employees * baseHostile[i];
+								}
+								workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+							}
+							wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+							cost[1] = 0;
+							income[1] = 0;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							if (level[0] + level[4] != level[1])
+								throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							else {
+								throughput[1] += building[bIt].getThroughput(6);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else if (choice == 4) {
 				system("cls");
 				cout << "Enter New Level: ";
@@ -21713,51 +23701,56 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					system("pause");
 				}
 				else {
-					level[3] = iIn;
+					level[4] = iIn;
 					workers[1] = 0;
 
-					if (iIn < level[4])
-						level[4] = iIn;
+					if (iIn < level[5])
+						level[5] = iIn;
+					if (level[0] + level[4] - level[1] < level[6])
+						level[6] = level[0] + level[4] - level[1];
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -21805,53 +23798,56 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					system("pause");
 				}
 				else {
-					level[4] = iIn;
+					level[5] = iIn;
 
-					if (iIn > level[3]) {
-						level[3] = iIn;
+					if (iIn > level[4]) {
+						level[4] = iIn;
 						workers[1] = 0;
-
+						
 						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 							int profession = 0;
 
 							for (int j = 0; j < building[bIt].getSize(); j++)
-								profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 							if (profession < 0)
 								profession = 0;
-							undiscriminated[i][1] = baseUndiscriminated[i];
-							discriminated[i][1] = baseDiscriminated[i];
-							profession -= undiscriminated[i][1] + discriminated[i][1];
-
-							if (discrimination) {
-								discriminated[i][1] += profession;
-
-								if (discriminated[i][1] < 0) {
-									undiscriminated[i][1] -= discriminated[i][1];
-									discriminated[i][1] = 0;
-								}
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
 							}
 							else {
-								undiscriminated[i][1] += profession;
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
 							}
-							if (undiscriminated[i][1] < 0)
-								undiscriminated[i][1] = 0;
-							workers[1] += undiscriminated[i][1] + discriminated[i][1];
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 						}
-						wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 					}
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -21881,6 +23877,169 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					}
 				}
 			}
+			else if (building[bIt].getThroughput(6) != 0) {
+				if (choice == 6) {
+					system("cls");
+					cout << "Enter New Company Owned Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 0) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						if (iIn > level[0] + level[4] - level[1])
+							iIn = level[0] + level[4] - level[1];
+						level[6] = iIn;
+
+						if (level[0] + level[4] != level[1]) {
+							throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+
+							if (throughput[1] > eosCap)
+								throughput[1] = eosCap;
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+							cost[1] = 0;
+							income[1] = 0;
+
+							for (i = 0; i < GSIZE; i++) {
+								good[i].setInput(1);
+								good[i].setOutput(1);
+
+								for (int j = 0; j < building[bIt].getSize(); j++) {
+									good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+									good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+								}
+								good[i].setInputOutput(1);
+								input[i] = good[i].getInput(1) - good[i].getInput(0);
+								output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+							}
+							for (i = 0; i < GSIZE; i++) {
+								purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+								localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+								if (good[i].localGood()) {
+									cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								}
+								else {
+									cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+									income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								}
+							}
+							profit[1][0] = income[1] - cost[1];
+
+							if (building[bIt].getBuilding() == "Construction Sector") {
+								profit[1][1] = income[1] - cost[1] * 0.9;
+								profit[1][2] = income[1] - cost[1] * 0.75;
+								profit[1][3] = income[1] - cost[1] * 0.65;
+								profit[1][4] = income[1] - cost[1] * 0.5;
+								profit[1][5] = income[1] - cost[1] * 0.25;
+							}
+						}
+					}
+				}
+				else {
+					system("cls");
+					cout << "Enter " << method.getProductionMethod(pm[choice - 7] + building[bIt].getProductionMethod()) << " Level: ";
+					cin >> iIn;
+
+					if (!cin) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else if (iIn < 1 || iIn > method.getSize(pm[choice - 7] + building[bIt].getProductionMethod())) {
+						system("cls");
+						cout << "Error invalid input\n\n";
+						system("pause");
+					}
+					else {
+						methodLevel[pm[choice - 7]] = iIn - 1;
+						workers[1] = 0;
+
+						for (i = 0; i < PSIZE; i++) {
+							int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+							int profession = 0;
+
+							for (int j = 0; j < building[bIt].getSize(); j++)
+								profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							if (profession < 0)
+								profession = 0;
+							if (employees == 0) {
+								accepted[i][1] = profession;
+								citizen[i][1] = 0;
+								prejudice[i][1] = 0;
+								erasure[i][1] = 0;
+								hostile[i][1] = 0;
+							}
+							else {
+								accepted[i][1] = float(profession) / employees * baseAccepted[i];
+								citizen[i][1] = float(profession) / employees * baseCitizen[i];
+								prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+								erasure[i][1] = float(profession) / employees * baseErasure[i];
+								hostile[i][1] = float(profession) / employees * baseHostile[i];
+							}
+							workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
+						}
+						wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+						throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
+						cost[1] = 0;
+						income[1] = 0;
+
+						if (throughput[1] > eosCap)
+							throughput[1] = eosCap;
+						if (level[0] + level[4] != level[1])
+							throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+						else {
+							throughput[1] += building[bIt].getThroughput(6);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							good[i].setInput(1);
+							good[i].setOutput(1);
+
+							for (int j = 0; j < building[bIt].getSize(); j++) {
+								good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+								good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							}
+							good[i].setInputOutput(1);
+							input[i] = good[i].getInput(1) - good[i].getInput(0);
+							output[i] = good[i].getOutput(1) - good[i].getOutput(0);
+						}
+						for (i = 0; i < GSIZE; i++) {
+							purchaseWeight[i] = getPurchaseWeightImportsCanceled(good, input, output, averageGdp, i);
+							localPurchaseWeight[i] = getLocalPurchaseWeightImportsCanceled(good, input, output, gdp, i);
+
+							if (good[i].localGood()) {
+								cost[1] += good[i].getInput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getMarketPricePrediction(input[i], output[i], localPurchaseWeight[i]);
+							}
+							else {
+								cost[1] += good[i].getInput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+								income[1] += good[i].getOutput(1) * good[i].getLocalPricePredictionImportsCanceled(mapi, input[i], output[i], purchaseWeight[i], localPurchaseWeight[i]);
+							}
+						}
+						profit[1][0] = income[1] - cost[1];
+
+						if (building[bIt].getBuilding() == "Construction Sector") {
+							profit[1][1] = income[1] - cost[1] * 0.9;
+							profit[1][2] = income[1] - cost[1] * 0.75;
+							profit[1][3] = income[1] - cost[1] * 0.65;
+							profit[1][4] = income[1] - cost[1] * 0.5;
+							profit[1][5] = income[1] - cost[1] * 0.25;
+						}
+					}
+				}
+			}
 			else {
 				system("cls");
 				cout << "Enter " << method.getProductionMethod(pm[choice - 6] + building[bIt].getProductionMethod()) << " Level: ";
@@ -21903,45 +24062,48 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
+						int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 						int profession = 0;
 
 						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+							profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						if (profession < 0)
 							profession = 0;
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = baseDiscriminated[i];
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
+						if (employees == 0) {
+							accepted[i][1] = profession;
+							citizen[i][1] = 0;
+							prejudice[i][1] = 0;
+							erasure[i][1] = 0;
+							hostile[i][1] = 0;
 						}
 						else {
-							undiscriminated[i][1] += profession;
+							accepted[i][1] = float(profession) / employees * baseAccepted[i];
+							citizen[i][1] = float(profession) / employees * baseCitizen[i];
+							prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+							erasure[i][1] = float(profession) / employees * baseErasure[i];
+							hostile[i][1] = float(profession) / employees * baseHostile[i];
 						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
+						workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
-					throughput[1] = ((float(level[0]) + float(level[3]) - float(level[1])) * 2 - float(level[4])) / 200 + 1;
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
+					throughput[1] = ((float(level[0]) + float(level[4]) - float(level[1])) * 2 - float(level[5])) / 200 + 1;
 					cost[1] = 0;
 					income[1] = 0;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
+					if (level[0] + level[4] != level[1])
+						throughput[1] += building[bIt].getThroughput(6) * float(level[6]) / (float(level[0]) + float(level[4]) - float(level[1]));
+					else {
+						throughput[1] += building[bIt].getThroughput(6);
+					}
 					for (i = 0; i < GSIZE; i++) {
 						good[i].setInput(1);
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -21997,75 +24159,37 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -22081,8 +24205,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -22146,76 +24270,54 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					workers[1] = 0;
 
 					for (i = 0; i < PSIZE; i++) {
-						baseUndiscriminated[i] = 0;
-						baseDiscriminated[i] = 0;
+						baseAccepted[i] = 0;
+						baseCitizen[i] = 0;
+						basePrejudice[i] = 0;
+						baseErasure[i] = 0;
+						baseHostile[i] = 0;
+						accepted[i][1] = 0;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 
-						if (level[0] > 0) {
-							for (int j = 0; j < building[bIt].getSize(); j++)
-								baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-							if (baseUndiscriminated[i] < 0)
-								baseUndiscriminated[i] = 0;
+						for (int j = 0; j < building[bIt].getSize(); j++) {
+							baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+							accepted[i][1] += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 						}
-						undiscriminated[i][1] = baseUndiscriminated[i];
-						discriminated[i][1] = 0;
+						if (baseAccepted[i] < 0)
+							baseAccepted[i] = 0;
+						if (accepted[i][1] < 0)
+							accepted[i][1] = 0;
+						workers[1] += accepted[i][1];
 					}
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][1] + discriminated[i][1];
-
-						if (discrimination) {
-							discriminated[i][1] += profession;
-
-							if (discriminated[i][1] < 0) {
-								undiscriminated[i][1] -= discriminated[i][1];
-								discriminated[i][1] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][1] += profession;
-						}
-						if (undiscriminated[i][1] < 0)
-							undiscriminated[i][1] = 0;
-						workers[1] += undiscriminated[i][1] + discriminated[i][1];
-					}
-					wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+					wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				}
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -22223,7 +24325,7 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				}
 				if (building[bIt].hasEOS()) {
 					throughput[0] = float(level[0]) / 100 + 1;
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					for (i = 0; i < 2; i++) {
 						if (throughput[i] > eosCap)
@@ -22237,8 +24339,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
 							good[i].setInput(level[1] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i, 0) * (throughput[0] + building[bIt].getThroughput(3)), 0);
 							good[i].setOutput(level[1] * method.getOutputGood(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i) * (throughput[0] + building[bIt].getThroughput(3) + good[i].getThroughput()), 0);
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						for (int j = 0; j < 2; j++)
 							good[i].setInputOutput(j);
@@ -22308,41 +24410,39 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				system("pause");
 			}
 			else {
-				level[3] = iIn;
+				level[4] = iIn;
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -22351,8 +24451,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22365,8 +24465,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22408,37 +24508,35 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+					profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
 			if (building[bIt].hasEOS()) {
-				throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+				throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 				if (throughput[1] > eosCap)
 					throughput[1] = eosCap;
@@ -22447,8 +24545,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22461,8 +24559,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 					good[i].setOutput(1);
 
 					for (int j = 0; j < building[bIt].getSize(); j++) {
-						good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-						good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+						good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+						good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 					}
 					good[i].setInputOutput(1);
 					input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22514,37 +24612,35 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[3] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+						profession += level[4] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
 				if (building[bIt].hasEOS()) {
-					throughput[1] = (float(level[0]) + float(level[3]) - float(level[1])) / 100 + 1;
+					throughput[1] = (float(level[0]) + float(level[4]) - float(level[1])) / 100 + 1;
 
 					if (throughput[1] > eosCap)
 						throughput[1] = eosCap;
@@ -22553,8 +24649,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (throughput[1] + building[bIt].getThroughput(4)), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (throughput[1] + building[bIt].getThroughput(4) + good[i].getThroughput()), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22567,8 +24663,8 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 						good[i].setOutput(1);
 
 						for (int j = 0; j < building[bIt].getSize(); j++) {
-							good[i].setInput(level[3] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
-							good[i].setOutput(level[3] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
+							good[i].setInput(level[4] * method.getInputGood(good[i], building[bIt].getBuilding(), mobilization, j + building[bIt].getProductionMethod(), methodLevel[j], i, 1) * (building[bIt].getThroughput(4) + 1), 1);
+							good[i].setOutput(level[4] * method.getOutputGood(j + building[bIt].getProductionMethod(), methodLevel[j], i) * (building[bIt].getThroughput(4) + good[i].getThroughput() + 1), 1);
 						}
 						good[i].setInputOutput(1);
 						input[i] = good[i].getInput(1) - good[i].getInput(0);
@@ -22602,30 +24698,35 @@ void stateImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, 
 	} while (!exit);
 }
 
-void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	int level[3] = { location[lIt].getLevel(), 0, 1 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float cost[2] = { 0 };
@@ -22708,19 +24809,13 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
+		cout << endl;
 		if (building[bIt].getInfrastructureUsage(level[2] - level[1]) > 0)
 			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		else if (building[bIt].getInfrastructureUsage(level[2] - level[1]) < 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -22870,8 +24965,7 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -22914,72 +25008,34 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 			}
 		}
 		else if (choice == 2) {
@@ -23004,37 +25060,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[0] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -23100,32 +25149,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -23163,159 +25210,46 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 		}
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitability(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitability(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (method.getProductionMethod(pm[choice - 4] + building[bIt].getProductionMethod()) == "Military Unit Type") {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -23328,32 +25262,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
 					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
@@ -23410,32 +25342,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -23474,30 +25404,35 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 	} while (!exit);
 }
 
-void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	int level[3] = { location[lIt].getLevel(), 0, 1 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float purchaseWeight[GSIZE];
@@ -23586,19 +25521,13 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
+		cout << endl;
 		if (building[bIt].getInfrastructureUsage(level[2] - level[1]) > 0)
 			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		else if (building[bIt].getInfrastructureUsage(level[2] - level[1]) < 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -23748,8 +25677,7 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -23792,72 +25720,34 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 			}
 		}
 		else if (choice == 2) {
@@ -23882,37 +25772,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[0] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -23982,32 +25865,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -24049,159 +25930,46 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 		}
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitability(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitability(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (method.getProductionMethod(pm[choice - 4] + building[bIt].getProductionMethod()) == "Military Unit Type") {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -24214,32 +25982,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
 					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
@@ -24300,32 +26066,30 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -24368,30 +26132,35 @@ void stateEoSOverride(goodsType good[GSIZE], productionMethodsType& method, buil
 	} while (!exit);
 }
 
-void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	int level[3] = { location[lIt].getLevel(), 0, 1 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float cost[2] = { 0 };
@@ -24474,19 +26243,13 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
+		cout << endl;
 		if (building[bIt].getInfrastructureUsage(level[2] - level[1]) > 0)
 			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		else if (building[bIt].getInfrastructureUsage(level[2] - level[1]) < 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -24636,8 +26399,7 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -24680,72 +26442,34 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 			}
 		}
 		else if (choice == 2) {
@@ -24770,37 +26494,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[0] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -24866,32 +26583,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -24929,159 +26644,46 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 		}
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitabilityImportsCanceled(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitabilityImportsCanceled(good, method, building, location, profession, input, output, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (method.getProductionMethod(pm[choice - 4] + building[bIt].getProductionMethod()) == "Military Unit Type") {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -25094,32 +26696,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
 					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
@@ -25176,32 +26776,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -25240,30 +26838,35 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 	} while (!exit);
 }
 
-void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, bool mobilization[ASIZE][2], int bIt, int lIt)
+void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float mapi, float gdp, float averageGdp, float eosCap, int citizenship[2], bool mobilization[ASIZE][2], int bIt, int lIt)
 {
 	int level[3] = { location[lIt].getLevel(), 0, 1 };
 	int methodLevel[LSIZE];
 	for (int i = 0; i < building[bIt].getSize(); i++)
 		methodLevel[i] = location[lIt].getProductionMethodLevel(i);
 	int workers[2] = { 0 };
-	int baseUndiscriminated[PSIZE] = { 0 };
-	int baseDiscriminated[PSIZE] = { 0 };
-	int undiscriminated[PSIZE][2] = { 0 };
-	int discriminated[PSIZE][2] = { 0 };
-	bool discrimination = false;
+	int baseAccepted[PSIZE] = { 0 };
+	int baseCitizen[PSIZE] = { 0 };
+	int basePrejudice[PSIZE] = { 0 };
+	int baseErasure[PSIZE] = { 0 };
+	int baseHostile[PSIZE] = { 0 };
+	int accepted[PSIZE][2] = { 0 };
+	int citizen[PSIZE][2] = { 0 };
+	int prejudice[PSIZE][2] = { 0 };
+	int erasure[PSIZE][2] = { 0 };
+	int hostile[PSIZE][2] = { 0 };
 	for (int i = 0; i < PSIZE; i++) {
 		for (int j = 0; j < building[bIt].getSize(); j++) {
-			baseUndiscriminated[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-			undiscriminated[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
+			baseAccepted[i] += location[lIt].getLevel() * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+			accepted[i][1] += method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 		}
-		if (baseUndiscriminated[i] < 0)
-			baseUndiscriminated[i] = 0;
-		if (undiscriminated[i][1] < 0)
-			undiscriminated[i][1] = 0;
-		workers[1] += undiscriminated[i][1];
+		if (baseAccepted[i] < 0)
+			baseAccepted[i] = 0;
+		if (accepted[i][1] < 0)
+			accepted[i][1] = 0;
+		workers[1] += accepted[i][1];
 	}
-	float wage[2] = { building[bIt].getWage(undiscriminated, discriminated, 0), building[bIt].getWage(undiscriminated, discriminated, 1) };
+	float wage[2] = { building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0), building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1) };
 	float input[GSIZE];
 	float output[GSIZE];
 	float purchaseWeight[GSIZE];
@@ -25352,19 +26955,13 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				cout << endl;
 			}
 		}
-		cout << "Discrimination: ";
-		if (discrimination)
-			cout << "yes";
-		else {
-			cout << "no";
-		}
-		cout << endl << endl;
+		cout << endl;
 		if (building[bIt].getInfrastructureUsage(level[2] - level[1]) > 0)
 			cout << "Infrastructure Usage: +" << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		else if (building[bIt].getInfrastructureUsage(level[2] - level[1]) < 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level[2] - level[1]) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			int employees[2] = { undiscriminated[i][0] + discriminated[i][0], undiscriminated[i][1] + discriminated[i][1] };
+			int employees[2] = { accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0], accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] };
 			if (employees[1] > employees[0])
 				cout << profession[i] << ": +" << employees[1] - employees[0] << endl;
 			else if (employees[1] < employees[0])
@@ -25514,8 +27111,7 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				cout << endl;
 			}
 		}
-		cout << i++ << ". Set Discriminated Workers\n";
-		cout << i++ << ". Toggle Discrimination\n"
+		cout << i++ << ". Set Discriminated Workers\n"
 			 << i << ". Profitability\n"
 			 << "0. Exit\n\n"
 			 << "Enter your choice: ";
@@ -25558,72 +27154,34 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				for (i = 0; i < 2; i++)
 					workers[i] = 0;
 				for (i = 0; i < PSIZE; i++) {
-					baseUndiscriminated[i] = 0;
-					baseDiscriminated[i] = 0;
+					baseAccepted[i] = 0;
+					baseCitizen[i] = 0;
+					basePrejudice[i] = 0;
+					baseErasure[i] = 0;
+					baseHostile[i] = 0;
 
-					if (level[0] > 0) {
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							baseUndiscriminated[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (baseUndiscriminated[i] < 0)
-							baseUndiscriminated[i] = 0;
-					}
 					for (int j = 0; j < 2; j++) {
-						undiscriminated[i][j] = baseUndiscriminated[i];
-						discriminated[i][j] = 0;
+						accepted[i][j] = 0;
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++) {
+						baseAccepted[i] += level[0] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+						accepted[i][1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (baseAccepted[i] < 0)
+						baseAccepted[i] = 0;
+					for (int j = 0; j < 2; j++) {
+						if (accepted[i][j] < 0)
+							accepted[i][j] = 0;
+						workers[j] += accepted[i][j];
 					}
-					else {
-						undiscriminated[i][1] += profession;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
 				}
 				for (i = 0; i < 2; i++)
-					wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+					wage[i] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, i);
 			}
 		}
 		else if (choice == 2) {
@@ -25648,37 +27206,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[0] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
-					undiscriminated[i][0] = baseUndiscriminated[i];
-					discriminated[i][0] = baseDiscriminated[i];
-				}
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+					int profession = 0;
 
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-
-						if (discrimination) {
-							discriminated[i][0] += profession;
-
-							if (discriminated[i][0] < 0) {
-								undiscriminated[i][0] -= discriminated[i][0];
-								discriminated[i][0] = 0;
-							}
-						}
-						else {
-							undiscriminated[i][0] += profession;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
+					for (int j = 0; j < building[bIt].getSize(); j++)
+						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					if (profession < 0)
+						profession = 0;
+					if (employees == 0) {
+						accepted[i][0] = profession;
+						citizen[i][0] = 0;
+						prejudice[i][0] = 0;
+						erasure[i][0] = 0;
+						hostile[i][0] = 0;
 					}
+					else {
+						accepted[i][0] = float(profession) / employees * baseAccepted[i];
+						citizen[i][0] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][0] = float(profession) / employees * basePrejudice[i];
+						erasure[i][0] = float(profession) / employees * baseErasure[i];
+						hostile[i][0] = float(profession) / employees * baseHostile[i];
+					}
+					workers[0] += accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0];
 				}
-				for (i = 0; i < PSIZE; i++)
-					workers[0] += undiscriminated[i][0] + discriminated[i][0];
-				wage[0] = building[bIt].getWage(undiscriminated, discriminated, 0);
+				wage[0] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 0);
 
 				for (i = 0; i < 2; i++) {
 					cost[i] = 0;
@@ -25748,32 +27299,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -25815,159 +27364,46 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 		}
 		else if (choice == i--) {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			profitabilityImportsCanceled(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, undiscriminated, discriminated, wage, bIt, lIt);
-		}
-		else if (choice == i--) {
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
-			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
-				}
-			}
-			if (discrimination) {
-				discrimination = false;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						undiscriminated[i][0] += profession;
-
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					undiscriminated[i][1] += profession;
-
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			else {
-				discrimination = true;
-
-				if (level[0] != level[1]) {
-					for (i = 0; i < PSIZE; i++) {
-						int profession = 0;
-
-						for (int j = 0; j < building[bIt].getSize(); j++)
-							profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-						if (profession < 0)
-							profession = 0;
-						profession -= undiscriminated[i][0] + discriminated[i][0];
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
-						if (undiscriminated[i][0] < 0)
-							undiscriminated[i][0] = 0;
-					}
-				}
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					for (int j = 0; j < 2; j++)
-						workers[j] += undiscriminated[i][j] + discriminated[i][j];
-				}
-			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			profitabilityImportsCanceled(good, method, building, location, profession, input, output, purchaseWeight, localPurchaseWeight, cost, income, profit, mapi, level[1], level[2], methodLevel, workers, accepted, citizen, prejudice, erasure, hostile, wage, bIt, lIt);
 		}
 		else if (choice == i) {
-			employment(profession, baseUndiscriminated, baseDiscriminated);
+			employment(profession, baseAccepted, baseCitizen, basePrejudice, baseErasure, baseHostile);
 
-			for (i = 0; i < 2; i++)
-				workers[i] = 0;
 			for (i = 0; i < PSIZE; i++) {
-				for (int j = 0; j < 2; j++) {
-					undiscriminated[i][j] = baseUndiscriminated[i];
-					discriminated[i][j] = baseDiscriminated[i];
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
+
+				for (int j = 0; j < 2; j++)
+					workers[j] = 0;
+				for (int j = 0; j < building[bIt].getSize(); j++) {
+					workers[0] += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
+					workers[1] += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				}
-			}
-			if (level[0] != level[1]) {
-				for (i = 0; i < PSIZE; i++) {
-					int profession = 0;
-
-					for (int j = 0; j < building[bIt].getSize(); j++)
-						profession += level[1] * method.getProfession(j + building[bIt].getProductionMethod(), location[lIt].getProductionMethodLevel(j), i);
-					if (profession < 0)
-						profession = 0;
-					profession -= undiscriminated[i][0] + discriminated[i][0];
-
-					if (discrimination) {
-						discriminated[i][0] += profession;
-
-						if (discriminated[i][0] < 0) {
-							undiscriminated[i][0] -= discriminated[i][0];
-							discriminated[i][0] = 0;
-						}
+				for (int j = 0; j < 2; j++) {
+					if (workers[j] < 0)
+						workers[j] = 0;
+					if (employees == 0) {
+						accepted[i][j] = workers[j];
+						citizen[i][j] = 0;
+						prejudice[i][j] = 0;
+						erasure[i][j] = 0;
+						hostile[i][j] = 0;
 					}
 					else {
-						undiscriminated[i][0] += profession;
-					}
-					if (undiscriminated[i][0] < 0)
-						undiscriminated[i][0] = 0;
-				}
-			}
-			for (i = 0; i < PSIZE; i++) {
-				int profession = 0;
-
-				for (int j = 0; j < building[bIt].getSize(); j++)
-					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
-				if (profession < 0)
-					profession = 0;
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
+						accepted[i][j] = float(workers[j]) / employees * baseAccepted[i];
+						citizen[i][j] = float(workers[j]) / employees * baseCitizen[i];
+						prejudice[i][j] = float(workers[j]) / employees * basePrejudice[i];
+						erasure[i][j] = float(workers[j]) / employees * baseErasure[i];
+						hostile[i][j] = float(workers[j]) / employees * baseHostile[i];
 					}
 				}
-				else {
-					undiscriminated[i][1] += profession;
-				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				for (int j = 0; j < 2; j++)
-					workers[j] += undiscriminated[i][j] + discriminated[i][j];
 			}
-			for (i = 0; i < 2; i++)
-				wage[i] = building[bIt].getWage(undiscriminated, discriminated, i);
+			for (int j = 0; j < 2; j++) {
+				workers[j] = 0;
+
+				for (i = 0; i < PSIZE; i++)
+					workers[j] += accepted[i][j] + citizen[i][j] + prejudice[i][j] + erasure[i][j] + hostile[i][j];
+				wage[j] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, j);
+			}
 		}
 		else if (method.getProductionMethod(pm[choice - 4] + building[bIt].getProductionMethod()) == "Military Unit Type") {
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -25980,32 +27416,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 			workers[1] = 0;
 
 			for (i = 0; i < PSIZE; i++) {
+				int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 				int profession = 0;
 
 				for (int j = 0; j < building[bIt].getSize(); j++)
 					profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 				if (profession < 0)
 					profession = 0;
-				undiscriminated[i][1] = baseUndiscriminated[i];
-				discriminated[i][1] = baseDiscriminated[i];
-				profession -= undiscriminated[i][1] + discriminated[i][1];
-
-				if (discrimination) {
-					discriminated[i][1] += profession;
-
-					if (discriminated[i][1] < 0) {
-						undiscriminated[i][1] -= discriminated[i][1];
-						discriminated[i][1] = 0;
-					}
+				if (employees == 0) {
+					accepted[i][1] = profession;
+					citizen[i][1] = 0;
+					prejudice[i][1] = 0;
+					erasure[i][1] = 0;
+					hostile[i][1] = 0;
 				}
 				else {
-					undiscriminated[i][1] += profession;
+					accepted[i][1] = float(profession) / employees * baseAccepted[i];
+					citizen[i][1] = float(profession) / employees * baseCitizen[i];
+					prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+					erasure[i][1] = float(profession) / employees * baseErasure[i];
+					hostile[i][1] = float(profession) / employees * baseHostile[i];
 				}
-				if (undiscriminated[i][1] < 0)
-					undiscriminated[i][1] = 0;
-				workers[1] += undiscriminated[i][1] + discriminated[i][1];
+				workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 			}
-			wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+			wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 			cost[1] = 0;
 			income[1] = 0;
 
@@ -26066,32 +27500,30 @@ void stateEoSOverrideImportsCanceled(goodsType good[GSIZE], productionMethodsTyp
 				workers[1] = 0;
 
 				for (i = 0; i < PSIZE; i++) {
+					int employees = baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i];
 					int profession = 0;
 
 					for (int j = 0; j < building[bIt].getSize(); j++)
 						profession += level[2] * method.getProfession(j + building[bIt].getProductionMethod(), methodLevel[j], i);
 					if (profession < 0)
 						profession = 0;
-					undiscriminated[i][1] = baseUndiscriminated[i];
-					discriminated[i][1] = baseDiscriminated[i];
-					profession -= undiscriminated[i][1] + discriminated[i][1];
-
-					if (discrimination) {
-						discriminated[i][1] += profession;
-
-						if (discriminated[i][1] < 0) {
-							undiscriminated[i][1] -= discriminated[i][1];
-							discriminated[i][1] = 0;
-						}
+					if (employees == 0) {
+						accepted[i][1] = profession;
+						citizen[i][1] = 0;
+						prejudice[i][1] = 0;
+						erasure[i][1] = 0;
+						hostile[i][1] = 0;
 					}
 					else {
-						undiscriminated[i][1] += profession;
+						accepted[i][1] = float(profession) / employees * baseAccepted[i];
+						citizen[i][1] = float(profession) / employees * baseCitizen[i];
+						prejudice[i][1] = float(profession) / employees * basePrejudice[i];
+						erasure[i][1] = float(profession) / employees * baseErasure[i];
+						hostile[i][1] = float(profession) / employees * baseHostile[i];
 					}
-					if (undiscriminated[i][1] < 0)
-						undiscriminated[i][1] = 0;
-					workers[1] += undiscriminated[i][1] + discriminated[i][1];
+					workers[1] += accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1];
 				}
-				wage[1] = building[bIt].getWage(undiscriminated, discriminated, 1);
+				wage[1] = building[bIt].getWage(citizenship, accepted, citizen, prejudice, erasure, hostile, 1);
 				cost[1] = 0;
 				income[1] = 0;
 
@@ -26305,7 +27737,7 @@ int navyUnitType()
 	}
 }
 
-void employment(string profession[PSIZE], int baseUndiscriminated[PSIZE], int baseDiscriminated[PSIZE])
+void employment(string profession[PSIZE], int baseAccepted[PSIZE], int baseCitizen[PSIZE], int basePrejudice[PSIZE], int baseErasure[PSIZE], int baseHostile[PSIZE])
 {
 	int p[PSIZE];
 	int choice;
@@ -26313,23 +27745,32 @@ void employment(string profession[PSIZE], int baseUndiscriminated[PSIZE], int ba
 	bool exit = false;
 
 	do {
-		bool accepted = false;
+		bool hasWorkers = false;
 		int i = 0;
+		int j = 0;
 		system("cls");
 
 		cout << "Employment\n\n";
-		for (int j = 0; j < PSIZE; j++) {
-			if (baseUndiscriminated[j] + baseDiscriminated[j] > 0) {
-				accepted = true;
-				p[i++] = j;
-				cout << "Undiscriminated " << profession[j] << ": " << baseUndiscriminated[j] << endl
-					 << "Discriminated " << profession[j] << ": " << baseDiscriminated[j] << endl;
+		for (;i < PSIZE; i++) {
+			if (baseAccepted[i] + baseCitizen[i] + basePrejudice[i] + baseErasure[i] + baseHostile[i] > 0) {
+				hasWorkers = true;
+				p[j++] = i;
+				cout << "Fully Accepted " << profession[i] << ": " << baseAccepted[i] << endl
+					 << "Second-class " << profession[i] << ": " << baseCitizen[i] << endl
+					 << "Openly Prejudiced " << profession[i] << ": " << basePrejudice[i] << endl
+					 << "Culturally Erased " << profession[i] << ": " << baseErasure[i] << endl
+					 << "Violently Discriminated " << profession[i] << ": " << baseHostile[i] << endl;
 			}
 		}
-		if (accepted)
+		if (hasWorkers)
 			cout << endl;
-		for (int j = 0; j < i; j++)
-			cout << j + 1 << ". Set Discriminated " << profession[p[j]] << endl;
+		i = 0;
+		for (int k = 0; k < j; k++) {
+			cout << ++i << ". Set Second-class " << profession[p[k]] << endl;
+			cout << ++i << ". Set Openly Prejudiced " << profession[p[k]] << endl;
+			cout << ++i << ". Set Culturally Erased " << profession[p[k]] << endl;
+			cout << ++i << ". Set Violently Discriminated " << profession[p[k]] << endl;
+		}
 		cout << "0. Exit\n\n"
 			 << "Enter your choice: ";
 		cin >> choice;
@@ -26349,9 +27790,10 @@ void employment(string profession[PSIZE], int baseUndiscriminated[PSIZE], int ba
 		}
 		else if (choice == 0)
 			exit = true;
-		else {
+		else if (choice % 4 == 1) {
+			choice = (choice - 1) / 4;
 			system("cls");
-			cout << "Enter Discriminated " << profession[p[choice - 1]] << ": ";
+			cout << "Enter Second-class " << profession[p[choice]] << ": ";
 			cin >> iIn;
 
 			if (!cin) {
@@ -26362,18 +27804,80 @@ void employment(string profession[PSIZE], int baseUndiscriminated[PSIZE], int ba
 				system("pause");
 			}
 			else {
-				baseUndiscriminated[p[choice - 1]] += baseDiscriminated[p[choice - 1]];
+				baseAccepted[p[choice]] += baseCitizen[p[choice]];
+				if (iIn > baseAccepted[p[choice]])
+					iIn = baseAccepted[p[choice]];
+				baseAccepted[p[choice]] -= iIn;
+				baseCitizen[p[choice]] = iIn;
+			}
+		}
+		else if (choice % 4 == 2) {
+			choice = (choice - 1) / 4;
+			system("cls");
+			cout << "Enter Openly Prejudiced " << profession[p[choice]] << ": ";
+			cin >> iIn;
 
-				if (iIn > baseUndiscriminated[p[choice - 1]])
-					iIn = baseUndiscriminated[p[choice - 1]];
-				baseUndiscriminated[p[choice - 1]] -= iIn;
-				baseDiscriminated[p[choice - 1]] = iIn;
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else {
+				baseAccepted[p[choice]] += basePrejudice[p[choice]];
+				if (iIn > baseAccepted[p[choice]])
+					iIn = baseAccepted[p[choice]];
+				baseAccepted[p[choice]] -= iIn;
+				basePrejudice[p[choice]] = iIn;
+			}
+		}
+		else if (choice % 4 == 3) {
+			choice = (choice - 1) / 4;
+			system("cls");
+			cout << "Enter Culturally Erased " << profession[p[choice]] << ": ";
+			cin >> iIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else {
+				baseAccepted[p[choice]] += baseErasure[p[choice]];
+				if (iIn > baseAccepted[p[choice]])
+					iIn = baseAccepted[p[choice]];
+				baseAccepted[p[choice]] -= iIn;
+				baseErasure[p[choice]] = iIn;
+			}
+		}
+		else {
+			choice = (choice - 1) / 4;
+			system("cls");
+			cout << "Enter Violently Discriminated " << profession[p[choice]] << ": ";
+			cin >> iIn;
+
+			if (!cin) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				system("cls");
+				cout << "Error invalid input\n\n";
+				system("pause");
+			}
+			else {
+				baseAccepted[p[choice]] += baseHostile[p[choice]];
+				if (iIn > baseAccepted[p[choice]])
+					iIn = baseAccepted[p[choice]];
+				baseAccepted[p[choice]] -= iIn;
+				baseHostile[p[choice]] = iIn;
 			}
 		}
 	} while (!exit);
 }
 
-void profitability(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int undiscriminated[PSIZE][2], int discriminated[PSIZE][2], float wage[2], int bIt, int lIt)
+void profitability(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int accepted[PSIZE][2], int citizen[PSIZE][2], int prejudice[PSIZE][2], int erasure[PSIZE][2], int hostile[PSIZE][2], float wage[2], int bIt, int lIt)
 {
 	string in;
 	char answer = '\0';
@@ -26402,8 +27906,8 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 		if (building[bIt].getInfrastructureUsage(level) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][0] + discriminated[i][0] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][0] + discriminated[i][0] << endl;
+			if (accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] > 0)
+				cout << profession[i] << ": " << accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] << endl;
 		}
 		if (cost[0] != 0) {
 			cout << endl
@@ -26540,8 +28044,8 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 		if (building[bIt].getInfrastructureUsage(newLevel) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(newLevel) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][1] + discriminated[i][1] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][1] + discriminated[i][1] << endl;
+			if (accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] > 0)
+				cout << profession[i] << ": " << accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] << endl;
 		}
 		if (cost[1] != 0) {
 			cout << endl
@@ -26815,7 +28319,7 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 	} while (toupper(answer) != 'Y' && toupper(answer) != 'N');
 }
 
-void profitability(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float purchaseWeight[GSIZE], float localPurchaseWeight[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int undiscriminated[PSIZE][2], int discriminated[PSIZE][2], float wage[2], int bIt, int lIt)
+void profitability(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float purchaseWeight[GSIZE], float localPurchaseWeight[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int accepted[PSIZE][2], int citizen[PSIZE][2], int prejudice[PSIZE][2], int erasure[PSIZE][2], int hostile[PSIZE][2], float wage[2], int bIt, int lIt)
 {
 	string in;
 	char answer = '\0';
@@ -26845,8 +28349,8 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 		if (building[bIt].getInfrastructureUsage(level) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][0] + discriminated[i][0] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][0] + discriminated[i][0] << endl;
+			if (accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] > 0)
+				cout << profession[i] << ": " << accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] << endl;
 		}
 		if (cost[0] != 0) {
 			cout << endl
@@ -26985,8 +28489,8 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 		if (building[bIt].getInfrastructureUsage(newLevel) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(newLevel) << endl;
 		for (;i < PSIZE; i++) {
-			if (undiscriminated[i][1] + discriminated[i][1] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][1] + discriminated[i][1] << endl;
+			if (accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] > 0)
+				cout << profession[i] << ": " << accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] << endl;
 		}
 		for (i = 0; good[i].getLocalPopConsumptionChange(localPurchaseWeight[i]) == 0 && i < GSIZE; i++) {}
 		if (i < GSIZE)
@@ -27336,7 +28840,7 @@ void profitability(goodsType good[GSIZE], productionMethodsType& method, buildin
 	} while (toupper(answer) != 'Y' && toupper(answer) != 'N');
 }
 
-void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int undiscriminated[PSIZE][2], int discriminated[PSIZE][2], float wage[2], int bIt, int lIt)
+void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int accepted[PSIZE][2], int citizen[PSIZE][2], int prejudice[PSIZE][2], int erasure[PSIZE][2], int hostile[PSIZE][2], float wage[2], int bIt, int lIt)
 {
 	string in;
 	char answer = '\0';
@@ -27365,8 +28869,8 @@ void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 		if (building[bIt].getInfrastructureUsage(level) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][0] + discriminated[i][0] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][0] + discriminated[i][0] << endl;
+			if (accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] > 0)
+				cout << profession[i] << ": " << accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] << endl;
 		}
 		if (cost[0] != 0) {
 			cout << endl
@@ -27503,8 +29007,8 @@ void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 		if (building[bIt].getInfrastructureUsage(newLevel) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(newLevel) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][1] + discriminated[i][1] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][1] + discriminated[i][1] << endl;
+			if (accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] > 0)
+				cout << profession[i] << ": " << accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] << endl;
 		}
 		if (cost[1] != 0) {
 			cout << endl
@@ -27778,7 +29282,7 @@ void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 	} while (toupper(answer) != 'Y' && toupper(answer) != 'N');
 }
 
-void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float purchaseWeight[GSIZE], float localPurchaseWeight[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int undiscriminated[PSIZE][2], int discriminated[PSIZE][2], float wage[2], int bIt, int lIt)
+void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& method, buildingsType building[BSIZE], locationsType location[SSIZE], string profession[PSIZE], float input[GSIZE], float output[GSIZE], float purchaseWeight[GSIZE], float localPurchaseWeight[GSIZE], float cost[2], float income[2], float profit[2][6], float mapi, int level, int newLevel, int methodLevel[LSIZE], int workers[2], int accepted[PSIZE][2], int citizen[PSIZE][2], int prejudice[PSIZE][2], int erasure[PSIZE][2], int hostile[PSIZE][2], float wage[2], int bIt, int lIt)
 {
 	string in;
 	char answer = '\0';
@@ -27808,8 +29312,8 @@ void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 		if (building[bIt].getInfrastructureUsage(level) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(level) << endl;
 		for (int i = 0; i < PSIZE; i++) {
-			if (undiscriminated[i][0] + discriminated[i][0] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][0] + discriminated[i][0] << endl;
+			if (accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] > 0)
+				cout << profession[i] << ": " << accepted[i][0] + citizen[i][0] + prejudice[i][0] + erasure[i][0] + hostile[i][0] << endl;
 		}
 		if (cost[0] != 0) {
 			cout << endl
@@ -27948,8 +29452,8 @@ void profitabilityImportsCanceled(goodsType good[GSIZE], productionMethodsType& 
 		if (building[bIt].getInfrastructureUsage(newLevel) > 0)
 			cout << "Infrastructure Usage: " << building[bIt].getInfrastructureUsage(newLevel) << endl;
 		for (;i < PSIZE; i++) {
-			if (undiscriminated[i][1] + discriminated[i][1] > 0)
-				cout << profession[i] << ": " << undiscriminated[i][1] + discriminated[i][1] << endl;
+			if (accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] > 0)
+				cout << profession[i] << ": " << accepted[i][1] + citizen[i][1] + prejudice[i][1] + erasure[i][1] + hostile[i][1] << endl;
 		}
 		for (i = 0; good[i].getLocalPopConsumptionChange(localPurchaseWeight[i]) == 0 && i < GSIZE; i++) {}
 		if (i < GSIZE)
@@ -28510,7 +30014,7 @@ float getLocalPurchaseWeightImportsCanceled(goodsType good[GSIZE], float input[G
 	return purchaseWeight / initialPurchaseWeight;
 }
 
-void save(goodsType good[GSIZE], buildingsType building[BSIZE], locationsType location[SSIZE], float inf, float mapi, float gdp, int states, float eosCap, bool mobilization[ASIZE][2])
+void save(goodsType good[GSIZE], buildingsType building[BSIZE], locationsType location[SSIZE], float inf, float mapi, float gdp, int states, float eosCap, int citizenship[2], bool mobilization[ASIZE][2])
 {
 	ofstream outFile;
 
@@ -28553,6 +30057,8 @@ void save(goodsType good[GSIZE], buildingsType building[BSIZE], locationsType lo
 		for (int j = 0; j < 2; j++)
 			outFile << mobilization[i][j] << endl;
 	}
+	for (int i = 0; i < 2; i++)
+		outFile << citizenship[i] << endl;
 	outFile << eosCap;
 	outFile.close();
 }
